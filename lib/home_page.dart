@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'components/home_app_bar.dart';
 import 'components/home_bottom_nav_bar.dart';
 import 'styles.dart';
+import 'Home_AppBar_Pages/Profile/profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +24,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Styles.pageBackground,
       appBar: HomeAppBar(
+        title: GestureDetector(
+            onTap: () {
+              setState(() {
+                _navigateToProfile(context);
+              });
+            },
+            child:
+                Icon(Icons.account_circle, color: Styles.homeBlue, size: 60.0)),
         leading: PopupMenuButton<Choice>(
+          // can "leading" code block be transferred to home_app_bar and called in this file?
           shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.grey),
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -69,14 +79,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: SingleChildScrollView(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(height: 40),
           footPressure(context),
+          SizedBox(height: 40),
           balance(context),
+          SizedBox(height: 40),
           activity(context),
         ],
-      ),
+      )),
       bottomNavigationBar: HomeBottomNavBar(
         currentIndex: _currentIndex,
         items: [
@@ -101,12 +115,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  /*GestureDetector(
-  onTap: () {
-  setState(() {
-  _showPassword = !_showPassword;
-  });
-  },*/
   Widget footPressure(BuildContext context) {
     return GestureDetector(
         onTap: () {
@@ -115,8 +123,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Container(
-            constraints: BoxConstraints.expand(height: 180),
-            //margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+            constraints:    BoxConstraints (maxHeight: 180, maxWidth: 410),
             child: Stack(children: [
               Align(
                   alignment: Alignment.topLeft,
@@ -139,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                     constraints: BoxConstraints.expand(height: 130),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: Styles.arisBlue),
+                        color: Styles.homeBlue),
                     child: Text(
                         //find a way to organize this without manually spacing in between text.
                         '                     left    right\n\n Resting     28N    29N\n\n  Active       35N   40N',
@@ -156,7 +163,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Container(
-            constraints: BoxConstraints.expand(height: 180),
+            constraints: BoxConstraints (maxHeight: 180, maxWidth: 410),
             child: Stack(children: [
               Align(
                   alignment: Alignment(-0.75, -1.0),
@@ -179,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.fromLTRB(180, 0, 0, 0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: Styles.arisBlue),
+                        color: Styles.homeBlue),
                     child: Text('Balance Bias: LEFT',
                         textAlign: TextAlign.center, style: Styles.infoBlack),
                   ))
@@ -194,7 +201,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Container(
-            constraints: BoxConstraints.expand(height: 180),
+            constraints: BoxConstraints (maxHeight: 180, maxWidth: 410),
             child: Stack(children: [
               Align(
                   alignment: Alignment(-0.7, -1.0),
@@ -208,7 +215,7 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment(-0.8, 1.0),
                   child: Icon(Icons.directions_run,
-                      size: 150.0, color: Styles.arisBlue)),
+                      size: 150.0, color: Styles.homeBlue)),
               Align(
                   alignment: Alignment(0.0, 0.0),
                   child: Container(
@@ -217,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.fromLTRB(180, 0, 0, 0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: Styles.arisBlue),
+                        color: Styles.homeBlue),
                     child: Text('Steps: 2400 ', style: Styles.infoBlack),
                   ))
             ])));
@@ -257,6 +264,37 @@ class _HomePageState extends State<HomePage> {
       selectedAccount = account;
       print(account.title);
       tapAccount = account.title;
+      switch (tapAccount) {
+        case "James":
+          {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CreateAccount()));
+          }
+          break;
+        case "Kobe":
+          {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CreateAccount()));
+          }
+          break;
+        case "Har_en":
+          {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CreateAccount()));
+          }
+          break;
+        case "Add Profile":
+          {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CreateAccount()));
+          }
+          break;
+        default:
+          {
+            //statements;
+          }
+          break;
+      }
     });
   }
 
@@ -292,6 +330,14 @@ class _HomePageState extends State<HomePage> {
         }
         break;
     }
+  }
+
+  _navigateToProfile(context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Profile(),
+        ));
   }
 
   _navigateToFootPressureDetail(context) {

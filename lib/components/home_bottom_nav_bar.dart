@@ -18,7 +18,7 @@ class HomeBottomNavBar extends BottomNavigationBar {
   final Color backgroundColor = Styles.arisBlack;
 
   @override
-  final Color selectedItemColor = Styles.arisBlue;
+  final Color selectedItemColor = Styles.homeBlue;
 
   @override
   final Color unselectedItemColor = Styles.textWhite;

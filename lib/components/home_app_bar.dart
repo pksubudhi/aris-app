@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import '../styles.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar({Widget leading, List<Widget> actions})
-      : super(leading: leading, actions: actions);
+  HomeAppBar({Widget title, Widget leading, List<Widget> actions})
+      : super(title: title, leading: leading, actions: actions);
 
   @override
   final IconThemeData iconTheme =
       IconThemeData(color: Colors.white, size: 40.0);
-
-  @override
-  final Widget title =
-      Icon(Icons.account_circle, color: Styles.arisBlue, size: 60.0);
 
   @override
   final brightness = Brightness.dark;
@@ -47,50 +43,4 @@ const List<Choice> accounts = const <Choice>[
   const Choice(title: 'Add Profile', icon: Icons.person_add),
 ];
 
-/* ATTEMPTING TO BRING THE FOLLOWING CODE (leading & actions) FROM THE HOME_PAGE TO THIS HOME_APP_BAR.
-
-leading: PopupMenuButton<Choice>(
-shape: RoundedRectangleBorder(
-side: BorderSide(color: Colors.grey),
-borderRadius: BorderRadius.all(Radius.circular(20.0))),
-padding: EdgeInsets.all(0.0),
-icon: Icon(Icons.menu, size: 30.0),
-color: Styles.pageBackground,
-onSelected: _select,
-itemBuilder: (BuildContext context) {
-return choices.map((Choice menuSelect) {
-return PopupMenuItem<Choice>(
-value: menuSelect,
-child: Column(children: [
-Row(children: [
-Icon(menuSelect.icon),
-Spacer(flex: 1),
-Text(menuSelect.title, style: Styles.infoWhite)
-])
-]));
-}).toList();
-},
-),
-actions: [
-PopupMenuButton<Choice>(
-shape: RoundedRectangleBorder(
-side: BorderSide(color: Colors.grey),
-borderRadius: BorderRadius.all(Radius.circular(20.0))),
-icon: Icon(Icons.group_add, size: 40.0),
-color: Styles.pageBackground,
-onSelected: _accountSelect,
-itemBuilder: (BuildContext context) {
-return accounts.map((Choice accountSelect) {
-return PopupMenuItem<Choice>(
-value: accountSelect,
-child: Column(children: [
-Row(children: [
-Icon(accountSelect.icon),
-Spacer(flex: 1),
-Text(accountSelect.title, style: Styles.infoWhite)
-])
-]));
-}).toList();
-},
-),
-],*/
+//LATER, ATTEMPT TO BRING THE CODE (leading & actions) FROM THE HOME_PAGE TO THIS HOME_APP_BAR.

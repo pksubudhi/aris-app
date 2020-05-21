@@ -2,7 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/.git" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/aris-app.git" vcs="Git" />
   </component>
 </project>

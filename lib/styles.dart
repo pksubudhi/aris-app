@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class Styles {
   static const double defaultHorizontalPadding = 50;
   static const _textSizeARIS = 56.0; //size
@@ -22,12 +21,17 @@ class Styles {
   static final Color textGrey = _hexToColor('B6B6B6');
   static final Color textWhite = _hexToColor('FFFFFF');
   static final Color boxGrey = _hexToColor('4F4F4F');
+  static final Color homeBlue = _hexToColor('4FC4DD');
   static final String _font = GoogleFonts.roboto.toString();
-  static final List<Color> logoLine = [arisBlack, arisBlue, arisGreen,];
-  static final double fillPercent = 33; // fills 56.23% for container from bottom
+  static final List<Color> logoLine = [
+    arisBlack,
+    arisBlue,
+    arisGreen,
+  ];
+  static final double fillPercent =
+      33; // fills 56.23% for container from bottom
   static final double fillStop = (100 - fillPercent) / 100;
   static final List<double> stops = [0.0, fillStop, 1.0];
-
 
   static final arisLogoText = TextStyle(
     fontFamily: _font,
@@ -53,6 +57,12 @@ class Styles {
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
+  static final infoWhiteS = TextStyle(
+    fontFamily: _font,
+    fontSize: _textSizeBodyS,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+  );
   static final infoBlack = TextStyle(
     fontFamily: _font,
     fontSize: _textSizeBodyM,
@@ -65,11 +75,24 @@ class Styles {
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
+  static final title = TextStyle(
+    fontFamily: _font,
+    fontSize: _textSizeTitle,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+  );
   static final subTitle = TextStyle(
     fontFamily: _font,
     fontSize: _textSizeBodyB,
     color: textWhite,
     fontWeight: FontWeight.w700,
+  );
+  static final subTitleUnderlined = TextStyle(
+    fontFamily: _font,
+    fontSize: _textSizeBodyB,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+    decoration: TextDecoration.underline,
   );
   static final loginButton = TextStyle(
     fontFamily: _font,
@@ -123,4 +146,19 @@ class Styles {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
   }
 
+  //SIZING CONSISTENCY FOR DIFFERENT DEVICES
+  static Size displaySize(BuildContext context) {
+    debugPrint('Size = ' + MediaQuery.of(context).size.toString());
+    return MediaQuery.of(context).size;
+  }
+
+  static double displayHeight(BuildContext context) {
+    debugPrint('Height = ' + displaySize(context).height.toString());
+    return displaySize(context).height;
+  }
+
+  static double displayWidth(BuildContext context) {
+    debugPrint('Width = ' + displaySize(context).width.toString());
+    return displaySize(context).width;
+  }
 }

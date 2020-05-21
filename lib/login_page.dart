@@ -24,29 +24,15 @@ class _LoginPageState extends State<LoginPage> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: Styles.displayHeight(context)*0.123),
             _arisLogo(context),
-            SizedBox(height: 50),
+            SizedBox(height: Styles.displayHeight(context)*0.06),
             _loginForm(),
-            SizedBox(height: 80),
+            SizedBox(height: Styles.displayHeight(context)*0.0985),
             _loginHelp(context),
           ],
         )));
   }
-
-/* //SIZING CONSISTENCY FOR DIFFERENT DEVICES
-  Size displaySize(BuildContext context) {
-    debugPrint('Size = ' + MediaQuery.of(context).size.toString());
-    return MediaQuery.of(context).size;
-  }
-  double displayHeight(BuildContext context) {
-    debugPrint('Height = ' + displaySize(context).height.toString());
-    return displaySize(context).height;
-  }
-  double displayWidth(BuildContext context) {
-    debugPrint('Width = ' + displaySize(context).width.toString());
-    return displaySize(context).width;
-  }*/
 
   Widget _arisLogo(BuildContext context) {
     return Styles.arisLogo(context);
@@ -61,12 +47,12 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   emailField(_username),
-                  SizedBox(height: 20),
+                  SizedBox(height: Styles.displayHeight(context)*0.0246),
                   passwordField(_password),
-                  SizedBox(height: 60),
+                  SizedBox(height: Styles.displayHeight(context)*0.0739),
                   Container(
                       constraints:
-                          BoxConstraints.expand(width: 320.0, height: 50.0),
+                          BoxConstraints.expand(width: Styles.displayWidth(context)*0.853, height: Styles.displayHeight(context)*0.0616),
                       child: RaisedButton(
                         // in the future make this button rounded
                         color: Colors.cyan,
@@ -187,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                     ]),
                     textAlign: TextAlign.center,
                   ))),
-          SizedBox(height: 40),
+          SizedBox(height: Styles.displayHeight(context)*0.0493),
         ]);
   }
 
