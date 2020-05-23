@@ -79,26 +79,23 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: SizedBox(
+          height: Styles.displayHeight(context),
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(height: 40),
-          footPressure(context),
-          SizedBox(height: 40),
-          balance(context),
-          SizedBox(height: 40),
-          activity(context),
-        ],
-      )),
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              footPressure(context),
+              balance(context),
+              activity(context),
+            ],
+          )),
       bottomNavigationBar: HomeBottomNavBar(
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none),
-              title: Text('Injury Alert')),
+              icon: Icon(Icons.notifications_none), title: Text('Injury')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.equalizer), title: Text('Biomechanics')),
+              icon: Icon(Icons.equalizer), title: Text('Biomech.')),
           BottomNavigationBarItem(
               icon: Icon(Icons.timeline), title: Text('Threshold')),
           BottomNavigationBarItem(
@@ -123,7 +120,9 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Container(
-            constraints:    BoxConstraints (maxHeight: 180, maxWidth: 410),
+            constraints: BoxConstraints(
+                maxHeight: Styles.displayHeight(context) * 0.2,
+                maxWidth: Styles.displayWidth(context) * 0.99),
             child: Stack(children: [
               Align(
                   alignment: Alignment.topLeft,
@@ -138,12 +137,18 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment(-.8, 1.0),
                   child: Image.asset('assets/pressure.png',
-                      height: 130, width: 125, fit: BoxFit.fitWidth)),
+                      height: Styles.displayHeight(context) * 0.145,
+                      width: Styles.displayWidth(context) * 0.302,
+                      fit: BoxFit.contain)),
+//
+
               Align(
                   alignment: Alignment(-1.0, 1.0),
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(180, 0, 0, 0),
-                    constraints: BoxConstraints.expand(height: 130),
+                    margin: EdgeInsets.fromLTRB(
+                        Styles.displayWidth(context) * 0.435, 0, 0, 0),
+                    constraints: BoxConstraints.expand(
+                        height: Styles.displayHeight(context) * 0.145),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Styles.homeBlue),
@@ -163,7 +168,9 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Container(
-            constraints: BoxConstraints (maxHeight: 180, maxWidth: 410),
+            constraints: BoxConstraints(
+                maxHeight: Styles.displayHeight(context) * 0.2,
+                maxWidth: Styles.displayWidth(context) * 0.99),
             child: Stack(children: [
               Align(
                   alignment: Alignment(-0.75, -1.0),
@@ -177,13 +184,17 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment(-.8, 1.0),
                   child: Image.asset('assets/balance.png',
-                      height: 130, width: 125, fit: BoxFit.fitWidth)),
+                      height: Styles.displayHeight(context) * 0.145,
+                      width: Styles.displayWidth(context) * 0.302,
+                      fit: BoxFit.contain)),
               Align(
                   alignment: Alignment(0.0, 0.0),
                   child: Container(
                     alignment: Alignment.center,
-                    constraints: BoxConstraints.tightFor(height: 50),
-                    margin: EdgeInsets.fromLTRB(180, 0, 0, 0),
+                    constraints: BoxConstraints.tightFor(
+                        height: Styles.displayHeight(context) * 0.0558),
+                    margin: EdgeInsets.fromLTRB(
+                        Styles.displayWidth(context) * 0.435, 0, 0, 0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Styles.homeBlue),
@@ -201,7 +212,9 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: Container(
-            constraints: BoxConstraints (maxHeight: 180, maxWidth: 410),
+            constraints: BoxConstraints(
+                maxHeight: Styles.displayHeight(context) * 0.2,
+                maxWidth: Styles.displayWidth(context) * 0.99),
             child: Stack(children: [
               Align(
                   alignment: Alignment(-0.7, -1.0),
@@ -214,14 +227,18 @@ class _HomePageState extends State<HomePage> {
                       ]))),
               Align(
                   alignment: Alignment(-0.8, 1.0),
-                  child: Icon(Icons.directions_run,
-                      size: 150.0, color: Styles.homeBlue)),
+                  child: Image.asset('assets/activity.png',
+                      height: Styles.displayHeight(context) * 0.145,
+                      width: Styles.displayWidth(context) * 0.302,
+                      fit: BoxFit.contain)),
               Align(
                   alignment: Alignment(0.0, 0.0),
                   child: Container(
                     alignment: Alignment.center,
-                    constraints: BoxConstraints.tightFor(height: 50),
-                    margin: EdgeInsets.fromLTRB(180, 0, 0, 0),
+                    constraints: BoxConstraints.tightFor(
+                        height: Styles.displayHeight(context) * 0.0558),
+                    margin: EdgeInsets.fromLTRB(
+                        Styles.displayWidth(context) * 0.435, 0, 0, 0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Styles.homeBlue),

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
 
 class Styles {
+  static double fontSizeAdjust(context, double fontConstant) {
+    double adjustedFont = screenSize(context) * fontConstant;
+    return adjustedFont;
+  }
+
+//  static double fontConst() {
+//    double constant = _textSizeAux / 987;
+//    fontSizeAdjust(context, constant);
+//  }
+
   static const double defaultHorizontalPadding = 50;
   static const _textSizeARIS = 56.0; //size
   static const _textSizeTitle = 36.0; //size
@@ -11,7 +22,6 @@ class Styles {
   static const _textSizeInfo = 18.0; //size
   static const _textSizeBodyS = 16.0; //size
   static const _textSizeGreenButtons = 14.0; //size
-  static const _textSizeFoot = 12.0; //size
   static final Color pageBackground = _hexToColor('232323');
   static final Color arisBlue = _hexToColor('47C1E2');
   static final Color arisGreen = _hexToColor('26BB74');
@@ -147,17 +157,25 @@ class Styles {
   }
 
   //SIZING CONSISTENCY FOR DIFFERENT DEVICES
-  static Size displaySize(BuildContext context) {
-    debugPrint('Size = ' + MediaQuery.of(context).size.toString());
+  static Size displaySize(context) {
+    //debugPrint('Size = ' + MediaQuery.of(context).size.toString());
     return MediaQuery.of(context).size;
   }
 
-  static double displayHeight(BuildContext context) {
+  static double screenSize(context) {
+    double a = pow(displayHeight(context), 2);
+    double b = pow(displayWidth(context), 2);
+    double c = sqrt(a + b);
+    debugPrint('Screen Size = $c');
+    return c;
+  }
+
+  static double displayHeight(context) {
     debugPrint('Height = ' + displaySize(context).height.toString());
     return displaySize(context).height;
   }
 
-  static double displayWidth(BuildContext context) {
+  static double displayWidth(context) {
     debugPrint('Width = ' + displaySize(context).width.toString());
     return displaySize(context).width;
   }

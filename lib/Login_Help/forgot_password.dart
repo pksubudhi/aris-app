@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
 import '../components/default_app_bar.dart';
-import '../login_page.dart';
+
 
 //Ideally, the user will be able to reset password directly on the app via text message ID verification.
 //Implementation of such a password reset method will come later. For now, classical email reset link to be used.
