@@ -22,16 +22,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double size = Styles.screenSize(context)/987;
-    double barHeight = Styles.displayHeight(context)/896;
     double barWidth = Styles.displayWidth(context)/414;
 
     return Scaffold(
       backgroundColor: Styles.pageBackground,
-      appBar:
-      PreferredSize(
-        preferredSize: Size.fromHeight(56*barHeight),
-        child:
-        HomeAppBar(
+      appBar: HomeAppBar(
           title: GestureDetector(
               onTap: () {
                 setState(() {
@@ -39,13 +34,13 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               child: Icon(Icons.account_circle,
-                  color: Styles.homeBlue, size: 60.0*barHeight)),
+                  color: Styles.homeBlue, size: 60.0)),
           leading: PopupMenuButton<Choice>(
             // can "leading" code block be transferred to home_app_bar and called in this file?
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.grey),
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            icon: Icon(Icons.menu, size: 30.0*barHeight),
+                borderRadius: BorderRadius.all(Radius.circular(size*20.0))),
+            icon: Icon(Icons.menu, size: 30.0),
             color: Styles.pageBackground,
             onSelected: _menuSelect,
             itemBuilder: (BuildContext context) {
@@ -67,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               shape: RoundedRectangleBorder(
                   side: BorderSide(color: Colors.grey),
                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              icon: Icon(Icons.group_add, size: 40.0*barHeight),
+              icon: Icon(Icons.group_add, size: 40.0),
               color: Styles.pageBackground,
               onSelected: _accountSelect,
               itemBuilder: (BuildContext context) {
@@ -86,7 +81,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
       body: SizedBox(
           height: Styles.displayHeight(context),
           child: Column(

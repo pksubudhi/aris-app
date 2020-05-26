@@ -18,8 +18,8 @@ class Styles {
   static const _textSizeTitle = 36.0; //size
   static const _textSizeAux = 30.0; //size
   static const _textSizeBodyB = 24.0; //size
-  static const _textSizeBodyM = 20.0; //size
-  static const _textSizeInfo = 18.0; //size
+  static const textSizeBodyM = 20.0; //size
+  static const textSizeInfo = 18.0; //size
   static const _textSizeBodyS = 16.0; //size
   static const _textSizeGreenButtons = 14.0; //size
   static final Color pageBackground = _hexToColor('232323');
@@ -32,7 +32,7 @@ class Styles {
   static final Color textWhite = _hexToColor('FFFFFF');
   static final Color boxGrey = _hexToColor('4F4F4F');
   static final Color homeBlue = _hexToColor('4FC4DD');
-  static final String _font = GoogleFonts.roboto.toString();
+  static final String font = GoogleFonts.roboto.toString();
   static final List<Color> logoLine = [
     arisBlack,
     arisBlue,
@@ -44,88 +44,93 @@ class Styles {
   static final List<double> stops = [0.0, fillStop, 1.0];
 
   static final arisLogoText = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeARIS,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final arisLogoI = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeARIS,
     color: arisBlue,
     fontWeight: FontWeight.w700,
   );
   static final info = TextStyle(
-    fontFamily: _font,
-    fontSize: _textSizeInfo,
+    fontFamily: font,
+    fontSize: textSizeInfo,
     color: textGrey,
     fontWeight: FontWeight.w700,
   );
   static final infoWhite = TextStyle(
-    fontFamily: _font,
-    fontSize: _textSizeBodyM,
+    fontFamily: font,
+    fontSize: textSizeBodyM,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final infoWhiteS = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeBodyS,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final infoBlack = TextStyle(
-    fontFamily: _font,
-    fontSize: _textSizeBodyM,
+    fontFamily: font,
+    fontSize: textSizeBodyM,
     color: arisBlack,
     fontWeight: FontWeight.w700,
   );
   static final homeTitles = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeAux,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final title = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeTitle,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final subTitle = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeBodyB,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final subTitleUnderlined = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeBodyB,
     color: textWhite,
     fontWeight: FontWeight.w700,
     decoration: TextDecoration.underline,
   );
   static final loginButton = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeAux,
     color: arisBlack,
     fontWeight: FontWeight.w700,
   );
   static final loginHelp = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeGreenButtons,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
   static final loginHelpGreen = TextStyle(
-    fontFamily: _font,
+    fontFamily: font,
     fontSize: _textSizeGreenButtons,
     color: arisGreen,
     fontWeight: FontWeight.w700,
   );
 
   static arisLogo(BuildContext context) {
+
+    double sizeScale = Styles.screenSize(context)/987;
+    double heightScale = Styles.displayHeight(context)/896;
+
     var welcome = List<Widget>();
     welcome.add(RichText(
+      textScaleFactor: sizeScale,
       text: TextSpan(style: arisLogoText, children: <TextSpan>[
         TextSpan(text: 'A.R.'),
         TextSpan(text: 'I', style: arisLogoI),
@@ -134,8 +139,8 @@ class Styles {
       textAlign: TextAlign.center,
     ));
     welcome.add(Text('Atlas Recovery & Intelligence System',
-        textAlign: TextAlign.center, style: info));
-    welcome.add(SizedBox(height: 20));
+        textAlign: TextAlign.center, style: info, textScaleFactor: sizeScale));
+    welcome.add(SizedBox(height: heightScale*20));
     welcome.add(Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -143,7 +148,7 @@ class Styles {
               stops: stops,
               end: Alignment.centerLeft,
               begin: Alignment.centerRight)),
-      height: 10,
+      height: heightScale*10,
     ));
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -158,7 +163,7 @@ class Styles {
 
   //SIZING CONSISTENCY FOR DIFFERENT DEVICES
   static Size displaySize(context) {
-    //debugPrint('Size = ' + MediaQuery.of(context).size.toString());
+//    debugPrint('Size = ' + MediaQuery.of(context).size.toString());
     return MediaQuery.of(context).size;
   }
 

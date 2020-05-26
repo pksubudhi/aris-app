@@ -18,17 +18,19 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScale = Styles.displayHeight(context) / 896;
     return Scaffold(
         // appBar: DefaultAppBar(),
+
         backgroundColor: Styles.pageBackground,
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: Styles.displayHeight(context)*0.123),
+            SizedBox(height: heightScale * 110),
             _arisLogo(context),
-            SizedBox(height: Styles.displayHeight(context)*0.06),
+            SizedBox(height: heightScale * 54),
             _loginForm(),
-            SizedBox(height: Styles.displayHeight(context)*0.0985),
+            SizedBox(height: heightScale * 88),
             _loginHelp(context),
           ],
         )));
@@ -39,26 +41,32 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginForm() {
+    double sizeScale = Styles.screenSize(context) / 987;
+    double heightScale = Styles.displayHeight(context) / 896;
+    double widthScale = Styles.displayWidth(context) / 414;
     return Container(
-        margin: EdgeInsets.all(50),
+        margin: EdgeInsets.all(sizeScale * 50),
         child: Form(
             key: _loginKey,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   emailField(_username),
-                  SizedBox(height: Styles.displayHeight(context)*0.0246),
+                  SizedBox(height: heightScale * 22),
                   passwordField(_password),
-                  SizedBox(height: Styles.displayHeight(context)*0.0739),
+                  SizedBox(height: heightScale * 66),
                   Container(
-                      constraints:
-                          BoxConstraints.expand(width: Styles.displayWidth(context)*0.853, height: Styles.displayHeight(context)*0.0616),
+                      constraints: BoxConstraints.expand(
+                          width: widthScale * 353, height: heightScale * 55),
                       child: RaisedButton(
                         // in the future make this button rounded
                         color: Colors.cyan,
-                        child: Text('Login', style: Styles.loginButton),
+                        child: Text('Login',
+                            style: Styles.loginButton,
+                            textScaleFactor: sizeScale),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0)),
+                            borderRadius:
+                                BorderRadius.circular(sizeScale * 30.0)),
                         onPressed: () {
                           if (!_loginKey.currentState.validate()) {
                             return;
@@ -74,8 +82,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget emailField(String username) {
+    double sizeScale = Styles.screenSize(context) / 987;
     return TextFormField(
       decoration: InputDecoration(
+        errorStyle: TextStyle(fontSize: 12*sizeScale),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.cyan),
         ),
@@ -83,11 +93,19 @@ class _LoginPageState extends State<LoginPage> {
           borderSide: BorderSide(color: Colors.cyan),
         ),
         labelText: username,
-        labelStyle: Styles.info,
+        labelStyle: TextStyle(
+            fontFamily: Styles.font,
+            fontSize: Styles.textSizeInfo * sizeScale,
+            color: Styles.textGrey,
+            fontWeight: FontWeight.w700),
         border: UnderlineInputBorder(
             borderSide: BorderSide(color: Styles.arisBlue)),
       ),
-      style: Styles.infoWhite,
+      style: TextStyle(
+          fontFamily: Styles.font,
+          fontSize: Styles.textSizeBodyM * sizeScale,
+          color: Styles.textWhite,
+          fontWeight: FontWeight.w700),
       cursorColor: Styles.textWhite,
       keyboardType: TextInputType.visiblePassword,
       textAlign: TextAlign.left,
@@ -104,9 +122,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget passwordField(String password) {
+    double sizeScale = Styles.screenSize(context) / 987;
     return TextFormField(
       //controller: _passwordController,
       decoration: InputDecoration(
+          errorStyle: TextStyle(fontSize: 12*sizeScale),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.cyan),
           ),
@@ -114,7 +134,11 @@ class _LoginPageState extends State<LoginPage> {
             borderSide: BorderSide(color: Colors.cyan),
           ),
           labelText: password,
-          labelStyle: Styles.info,
+          labelStyle: TextStyle(
+              fontFamily: Styles.font,
+              fontSize: Styles.textSizeInfo * sizeScale,
+              color: Styles.textGrey,
+              fontWeight: FontWeight.w700),
           suffixIcon: GestureDetector(
               onTap: () {
                 setState(() {
@@ -123,9 +147,15 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Icon(
                 _showPassword ? Icons.visibility : Icons.visibility_off,
+                size: 24*sizeScale,
               ))),
       obscureText: !_showPassword,
-      style: Styles.infoWhite,
+      style: TextStyle(
+        fontFamily: Styles.font,
+        fontSize: Styles.textSizeBodyM * sizeScale,
+        color: Styles.textWhite,
+        fontWeight: FontWeight.w700,
+      ),
       cursorColor: Styles.textWhite,
       keyboardType: TextInputType.visiblePassword,
       textAlign: TextAlign.left,
@@ -142,6 +172,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginHelp(BuildContext context) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    double heightScale = Styles.displayHeight(context) / 896;
     return Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -151,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                   //margin: EdgeInsets.all(50),
                   child: RichText(
+                      textScaleFactor: sizeScale,
                       text: TextSpan(
                           style: Styles.loginHelp,
                           children: <TextSpan>[
@@ -165,6 +198,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                   margin: EdgeInsets.all(10),
                   child: RichText(
+                    textScaleFactor: sizeScale,
                     text:
                         TextSpan(style: Styles.loginHelp, children: <TextSpan>[
                       TextSpan(text: "\nDon't have an account?"),
@@ -173,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                     ]),
                     textAlign: TextAlign.center,
                   ))),
-          SizedBox(height: Styles.displayHeight(context)*0.0493),
+          SizedBox(height: heightScale * 44),
         ]);
   }
 
