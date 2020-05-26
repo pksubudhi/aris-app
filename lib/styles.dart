@@ -166,17 +166,17 @@ class Styles {
     double a = pow(displayHeight(context), 2);
     double b = pow(displayWidth(context), 2);
     double c = sqrt(a + b);
-    debugPrint('Screen Size = $c');
+//    debugPrint('Screen Size = $c');
     return c;
   }
 
   static double displayHeight(context) {
-    debugPrint('Height = ' + displaySize(context).height.toString());
+//    debugPrint('Height = ' + displaySize(context).height.toString());
     return displaySize(context).height;
   }
 
   static double displayWidth(context) {
-    debugPrint('Width = ' + displaySize(context).width.toString());
+//    debugPrint('Width = ' + displaySize(context).width.toString());
     return displaySize(context).width;
   }
 }

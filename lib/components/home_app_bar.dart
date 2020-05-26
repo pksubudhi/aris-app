@@ -5,9 +5,10 @@ class HomeAppBar extends AppBar {
   HomeAppBar({Widget title, Widget leading, List<Widget> actions})
       : super(title: title, leading: leading, actions: actions);
 
-  @override
-  final IconThemeData iconTheme =
-      IconThemeData(color: Colors.white, size: 40.0);
+// IS THIS EVER USED?
+//  @override
+//  final IconThemeData iconTheme =
+//      IconThemeData(color: Colors.white, size: 40.0);
 
   @override
   final brightness = Brightness.dark;

@@ -21,63 +21,71 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double size = Styles.screenSize(context)/987;
+    double barHeight = Styles.displayHeight(context)/896;
+    double barWidth = Styles.displayWidth(context)/414;
+
     return Scaffold(
       backgroundColor: Styles.pageBackground,
-      appBar: HomeAppBar(
-        title: GestureDetector(
-            onTap: () {
-              setState(() {
-                _navigateToProfile(context);
-              });
-            },
-            child:
-                Icon(Icons.account_circle, color: Styles.homeBlue, size: 60.0)),
-        leading: PopupMenuButton<Choice>(
-          // can "leading" code block be transferred to home_app_bar and called in this file?
-          shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          padding: EdgeInsets.all(0.0),
-          icon: Icon(Icons.menu, size: 30.0),
-          color: Styles.pageBackground,
-          onSelected: _menuSelect,
-          itemBuilder: (BuildContext context) {
-            return choices.map((Choice menuSelect) {
-              return PopupMenuItem<Choice>(
-                  value: menuSelect,
-                  child: Column(children: [
-                    Row(children: [
-                      Icon(menuSelect.icon),
-                      SizedBox(width: 10),
-                      Text(menuSelect.title, style: Styles.infoWhite)
-                    ])
-                  ]));
-            }).toList();
-          },
-        ),
-        actions: [
-          PopupMenuButton<Choice>(
+      appBar:
+      PreferredSize(
+        preferredSize: Size.fromHeight(56*barHeight),
+        child:
+        HomeAppBar(
+          title: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _navigateToProfile(context);
+                });
+              },
+              child: Icon(Icons.account_circle,
+                  color: Styles.homeBlue, size: 60.0*barHeight)),
+          leading: PopupMenuButton<Choice>(
+            // can "leading" code block be transferred to home_app_bar and called in this file?
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.grey),
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            icon: Icon(Icons.group_add, size: 40.0),
+            icon: Icon(Icons.menu, size: 30.0*barHeight),
             color: Styles.pageBackground,
-            onSelected: _accountSelect,
+            onSelected: _menuSelect,
             itemBuilder: (BuildContext context) {
-              return accounts.map((Choice accountSelect) {
+              return choices.map((Choice menuSelect) {
                 return PopupMenuItem<Choice>(
-                    value: accountSelect,
+                    value: menuSelect,
                     child: Column(children: [
                       Row(children: [
-                        Icon(accountSelect.icon),
-                        SizedBox(width: 10),
-                        Text(accountSelect.title, style: Styles.infoWhite)
+                        Icon(menuSelect.icon, size: 24*size),
+                        SizedBox(width: 10*barWidth),
+                        Text(menuSelect.title, style: Styles.infoWhite, textScaleFactor: size)
                       ])
                     ]));
               }).toList();
             },
           ),
-        ],
+          actions: [
+            PopupMenuButton<Choice>(
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.grey),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              icon: Icon(Icons.group_add, size: 40.0*barHeight),
+              color: Styles.pageBackground,
+              onSelected: _accountSelect,
+              itemBuilder: (BuildContext context) {
+                return accounts.map((Choice accountSelect) {
+                  return PopupMenuItem<Choice>(
+                      value: accountSelect,
+                      child: Column(children: [
+                        Row(children: [
+                          Icon(accountSelect.icon),
+                          SizedBox(width: 10*barWidth),
+                          Text(accountSelect.title, style: Styles.infoWhite)
+                        ])
+                      ]));
+                }).toList();
+              },
+            ),
+          ],
+        ),
       ),
       body: SizedBox(
           height: Styles.displayHeight(context),
@@ -91,15 +99,20 @@ class _HomePageState extends State<HomePage> {
           )),
       bottomNavigationBar: HomeBottomNavBar(
         currentIndex: _currentIndex,
+        iconSize: 40.0 * size,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none), title: Text('Injury')),
+              icon: Icon(Icons.notifications_none),
+              title: Text('Injury', textScaleFactor: size)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.equalizer), title: Text('Biomech.')),
+              icon: Icon(Icons.equalizer),
+              title: Text('Biomech.', textScaleFactor: size)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.timeline), title: Text('Threshold')),
+              icon: Icon(Icons.timeline),
+              title: Text('Threshold', textScaleFactor: size)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), title: Text('Recovery'))
+              icon: Icon(Icons.favorite_border),
+              title: Text('Recovery', textScaleFactor: size))
         ],
         onTap: (index) {
           setState(() {
@@ -113,6 +126,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget footPressure(BuildContext context) {
+    double size = Styles.screenSize(context) / 987;
     return GestureDetector(
         onTap: () {
           setState(() {
@@ -126,14 +140,20 @@ class _HomePageState extends State<HomePage> {
             child: Stack(children: [
               Align(
                   alignment: Alignment.topLeft,
-                  child: RichText(
-                      text: TextSpan(
-                          style: Styles.arisLogoText,
-                          children: <TextSpan>[
-                        TextSpan(
-                            text: 'Foot Pressure', style: Styles.homeTitles),
-                        TextSpan(text: ' Live', style: Styles.loginHelpGreen),
-                      ]))),
+                  child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: RichText(
+                          textScaleFactor: size,
+                          text: TextSpan(
+                              style: Styles.arisLogoText,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'Foot Pressure',
+                                    style: Styles.homeTitles),
+                                TextSpan(
+                                    text: ' Live',
+                                    style: Styles.loginHelpGreen),
+                              ])))),
               Align(
                   alignment: Alignment(-.8, 1.0),
                   child: Image.asset('assets/pressure.png',
@@ -145,22 +165,23 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment(-1.0, 1.0),
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(
-                        Styles.displayWidth(context) * 0.435, 0, 0, 0),
-                    constraints: BoxConstraints.expand(
-                        height: Styles.displayHeight(context) * 0.145),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Styles.homeBlue),
-                    child: Text(
-                        //find a way to organize this without manually spacing in between text.
-                        '                     left    right\n\n Resting     28N    29N\n\n  Active       35N   40N',
-                        style: Styles.infoBlack),
-                  ))
+                      margin: EdgeInsets.fromLTRB(
+                          Styles.displayWidth(context) * 0.435, 0, 0, 0),
+                      constraints: BoxConstraints.expand(
+                          height: Styles.displayHeight(context) * 0.145),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Styles.homeBlue),
+                      child: Text(
+                          //find a way to organize this without manually spacing in between text.
+                          '                     left    right\n\n Resting     28N    29N\n\n  Active       35N   40N',
+                          style: Styles.infoBlack,
+                          textScaleFactor: size)))
             ])));
   }
 
   Widget balance(BuildContext context) {
+    double size = Styles.screenSize(context) / 987;
     return GestureDetector(
         onTap: () {
           setState(() {
@@ -175,12 +196,14 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment(-0.75, -1.0),
                   child: RichText(
+                      textScaleFactor: size,
                       text: TextSpan(
                           style: Styles.arisLogoText,
                           children: <TextSpan>[
-                        TextSpan(text: 'Balance', style: Styles.homeTitles),
-                        TextSpan(text: ' Live', style: Styles.loginHelpGreen),
-                      ]))),
+                            TextSpan(text: 'Balance', style: Styles.homeTitles),
+                            TextSpan(
+                                text: ' Live', style: Styles.loginHelpGreen),
+                          ]))),
               Align(
                   alignment: Alignment(-.8, 1.0),
                   child: Image.asset('assets/balance.png',
@@ -199,12 +222,15 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(30),
                         color: Styles.homeBlue),
                     child: Text('Balance Bias: LEFT',
-                        textAlign: TextAlign.center, style: Styles.infoBlack),
+                        textAlign: TextAlign.center,
+                        style: Styles.infoBlack,
+                        textScaleFactor: size),
                   ))
             ])));
   }
 
   Widget activity(BuildContext context) {
+    double size = Styles.screenSize(context) / 987;
     return GestureDetector(
         onTap: () {
           setState(() {
@@ -219,9 +245,9 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment(-0.7, -1.0),
                   child: RichText(
-                      text: TextSpan(
-                          style: Styles.arisLogoText,
-                          children: <TextSpan>[
+                      textScaleFactor: size,
+                      text: TextSpan(style: Styles.arisLogoText, children: <
+                          TextSpan>[
                         TextSpan(text: 'Activity', style: Styles.homeTitles),
                         TextSpan(text: ' Live', style: Styles.loginHelpGreen),
                       ]))),
@@ -242,7 +268,8 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Styles.homeBlue),
-                    child: Text('Steps: 2400 ', style: Styles.infoBlack),
+                    child: Text('Steps: 2400 ',
+                        style: Styles.infoBlack, textScaleFactor: size),
                   ))
             ])));
   }
