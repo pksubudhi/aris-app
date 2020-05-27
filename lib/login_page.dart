@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: heightScale * 110),
+            SizedBox(height: heightScale * 110), // try Spacer(flex: 110) ?
             _arisLogo(context),
             SizedBox(height: heightScale * 54),
             _loginForm(),

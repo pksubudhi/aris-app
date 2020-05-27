@@ -46,9 +46,7 @@ class _ProfileState extends State<Profile> {
   }
 
   _bottomBarNavigate(BuildContext context, int navSelect) {
-    double sizeScale = Styles.screenSize(context) / 987;
     double heightScale = Styles.displayHeight(context) / 896;
-    double widthScale = Styles.displayWidth(context) / 414;
     switch (navSelect) {
       case 0:
         {
@@ -59,12 +57,12 @@ class _ProfileState extends State<Profile> {
                 children: [
                   SizedBox(height: heightScale * 24),
                   _profileName(context),
-                  SizedBox(height: heightScale * 50),
-                  _profileWorkout(context),
-                  SizedBox(height: heightScale * 23),
-                  _profileRehab(context),
-                  SizedBox(height: heightScale * 23),
-                  _profileSport(context),
+                  SizedBox(height: heightScale * 40),
+                  _activityWorkout(context),
+                  SizedBox(height: heightScale * 30),
+                  _activityRehab(context),
+                  SizedBox(height: heightScale * 30),
+                  _activitySport(context),
                 ],
               ));
         }
@@ -78,8 +76,8 @@ class _ProfileState extends State<Profile> {
                 children: [
                   SizedBox(height: heightScale * 24),
                   _profileName(context),
-                  SizedBox(height: heightScale * 50),
-                  _profileStats(context),
+                  SizedBox(height: heightScale * 30),
+                  _stats(context),
                 ],
               ));
         }
@@ -93,8 +91,8 @@ class _ProfileState extends State<Profile> {
                 children: [
                   SizedBox(height: heightScale * 24),
                   _profileName(context),
-                  SizedBox(height: heightScale * 50),
-                  _profileInfo(context),
+                  SizedBox(height: heightScale * 30),
+                  _userDetails(context),
                 ],
               ));
         }
@@ -125,13 +123,13 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _profileWorkout(context) {
+  Widget _activityWorkout(context) {
     double sizeScale = Styles.screenSize(context) / 987;
 
     return Stack(
       children: [
-        _colorBox(Styles.arisGreen, 'Workout', 'March 10'),
-        _bodyBox(
+        _activityColorBox(Styles.arisGreen, 'Workout', 'March 10'),
+        _activityBodyBox(
             Icon(Icons.directions_run,
                 size: sizeScale * 100.0, color: Styles.textWhite),
             Icon(Icons.info_outline,
@@ -141,13 +139,13 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _profileRehab(context) {
+  Widget _activityRehab(context) {
     double sizeScale = Styles.screenSize(context) / 987;
 
     return Stack(
       children: [
-        _colorBox(Styles.arisBlue, 'Rehab', 'March 1'),
-        _bodyBox(
+        _activityColorBox(Styles.arisBlue, 'Rehab', 'March 1'),
+        _activityBodyBox(
             Icon(Icons.favorite_border,
                 size: sizeScale * 100.0, color: Styles.textWhite),
             Icon(Icons.info_outline,
@@ -157,13 +155,13 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _profileSport(context) {
+  Widget _activitySport(context) {
     double sizeScale = Styles.screenSize(context) / 987;
 
     return Stack(
       children: [
-        _colorBox(Styles.arisBlack, 'Sport', 'March 21'),
-        _bodyBox(
+        _activityColorBox(Styles.arisBlack, 'Sport', 'March 21'),
+        _activityBodyBox(
             Icon(Icons.tonality,
                 size: sizeScale * 100.0, color: Styles.textWhite),
             Icon(Icons.info_outline,
@@ -173,7 +171,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _colorBox(Color color, String label, String date) {
+  Widget _activityColorBox(Color color, String label, String date) {
     double sizeScale = Styles.screenSize(context) / 987;
 
     return Container(
@@ -193,10 +191,8 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _bodyBox(Icon icon, Icon details, String status) {
+  Widget _activityBodyBox(Icon icon, Icon details, String status) {
     double sizeScale = Styles.screenSize(context) / 987;
-    double heightScale = Styles.displayHeight(context) / 896;
-    double widthScale = Styles.displayWidth(context) / 414;
     return Container(
       color: Styles.pageBackground,
       margin: EdgeInsets.fromLTRB(0, sizeScale * 50.0, 0, 0),
@@ -215,84 +211,85 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _profileStats(context) {
+  Widget _stats(context) {
     double sizeScale = Styles.screenSize(context) / 987;
     double heightScale = Styles.displayHeight(context) / 896;
     double widthScale = Styles.displayWidth(context) / 414;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(sizeScale * 30),
+              borderRadius: BorderRadius.circular(sizeScale * 50),
               color: Styles.arisBlue),
           constraints: BoxConstraints(
-              maxHeight: heightScale * 100, maxWidth: widthScale * 200),
+              maxHeight: heightScale * 80, maxWidth: widthScale * 200),
           child: Align(
             alignment: Alignment.center,
             child: RichText(
               textScaleFactor: sizeScale,
+              textAlign: TextAlign.center,
               text: TextSpan(
                 children: <TextSpan>[
                   TextSpan(text: 'Games Played\n', style: Styles.infoWhite),
                   TextSpan(text: '24', style: Styles.homeTitles),
                 ],
               ),
-              textAlign: TextAlign.center,
             ),
           ),
         ),
         SizedBox(height: heightScale * 50),
-        _profileInfoSection('Playing time'),
-        SizedBox(height: heightScale * 12),
-        _profileInfoBar(0.90),
-        SizedBox(height: heightScale * 24),
-        _profileInfoSection('Resting time'),
-        SizedBox(height: heightScale * 12),
-        _profileInfoBar(0.50),
-        SizedBox(height: heightScale * 24),
-        _profileInfoSection('Cumulative force absorbed (Kg):'),
-        Text ('200 Kg', style: Styles.infoWhite, textScaleFactor: sizeScale),
-        SizedBox(height: heightScale * 12),
-        _profileInfoBar(0.60),
-        SizedBox(height: heightScale * 24),
-        _profileInfoSection('Force threshold exceeded per game:'),
-        Text ('2 times', style: Styles.infoWhite, textScaleFactor: sizeScale),
-        SizedBox(height: heightScale * 12),
-        _profileInfoBar(0.20),
+        _statsInfoSection('Playing time per game:', '40 min', 0.9),
+        SizedBox(height: heightScale * 50),
+        _statsInfoSection('Resting time per game:', '10 min', 0.50),
+        SizedBox(height: heightScale * 50),
+        _statsInfoSection('Cumulative force absorbed (Kg):', '200 Kg', 0.75),
+        SizedBox(height: heightScale * 50),
+        _statsInfoSection(
+            'Force threshold exceeded per game:', '9 Times', 0.90),
       ],
     );
   }
 
-  Widget _profileInfoSection(String section) {
+  Widget _statsInfoSection(String section, String value, double rating) {
+    double widthScale = Styles.displayWidth(context) / 414;
     double sizeScale = Styles.screenSize(context) / 987;
-    return Text(section, style: Styles.infoWhite, textScaleFactor: sizeScale);
+    double pad = widthScale * 40;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding: EdgeInsets.fromLTRB(pad, 0, 0, 0),
+          child: Text('$section\n$value',
+              style: Styles.infoWhite,
+              textAlign: TextAlign.left,
+              textScaleFactor: sizeScale),
+        ),
+        _statsInfoBar(rating),
+      ],
+    );
   }
 
-  Widget _profileInfoBar(double rating) {
+  Widget _statsInfoBar(double rating) {
     double heightScale = Styles.displayHeight(context) / 896;
-    double widthScale = Styles.displayWidth(context) / 414;
     double ratingScale = 1 - rating;
     return Stack(
       children: [
-        Align(
-          alignment: Alignment(0.5, 0),
-          child: Container(
-            constraints: BoxConstraints(maxWidth: widthScale * 300),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: Styles.logoLine,
-                stops: Styles.stops,
-                end: Alignment.centerRight,
-                begin: Alignment.centerLeft,
-              ),
+        Container(
+          height: heightScale * 10,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: Styles.logoLine,
+              stops: Styles.stops,
+              end: Alignment.centerRight,
+              begin: Alignment.centerLeft,
             ),
-            height: heightScale * 10,
           ),
         ),
         Align(
           alignment: Alignment(1, 0),
           child: Container(
-            width: widthScale * 329 * ratingScale,
+            width: Styles.displayWidth(context) * ratingScale,
             color: Styles.pageBackground,
             height: heightScale * 10,
           ),
@@ -301,7 +298,49 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _profileInfo(context) {
-    return Column();
+  Widget _userDetails(context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _userData('Age', '35'),
+        _userData('Gender', 'Male'),
+        _userData('Height', '6ft 9in'),
+        _userData('Weight', '250lb'),
+        _userData('Sport', 'Basketball'),
+        _userData('Injuries', '4 Click Here')
+      ],
+    );
+  }
+
+  Widget _userData(String label, String data) {
+    double heightScale = Styles.displayHeight(context) / 896;
+    double sizeScale = Styles.screenSize(context) / 987;
+    return Column(
+      children: [
+        Stack(
+          children: [
+            Align(
+              alignment: Alignment(-0.8, 0),
+              child: Text(label,
+                  style: Styles.infoWhite, textScaleFactor: sizeScale),
+            ),
+            Align(
+              alignment: Alignment(0.8, 0),
+              child: Text(data,
+                  style: Styles.infoWhite,
+                  textScaleFactor: sizeScale,
+                  textAlign: TextAlign.center),
+            ),
+          ],
+        ),
+        SizedBox(height: heightScale * 30),
+        Container(
+          height: heightScale * 3,
+          color: Styles.arisBlue,
+        ),
+        SizedBox(height: heightScale * 30),
+      ],
+    );
   }
 }
