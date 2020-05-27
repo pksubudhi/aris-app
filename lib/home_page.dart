@@ -348,19 +348,19 @@ class _HomePageState extends State<HomePage> {
         case "James":
           {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreateAccount()));
+                MaterialPageRoute(builder: (context) => PasswordHelp()));
           }
           break;
         case "Kobe":
           {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreateAccount()));
+                MaterialPageRoute(builder: (context) => PasswordHelp()));
           }
           break;
         case "Har_en":
           {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CreateAccount()));
+                MaterialPageRoute(builder: (context) => PasswordHelp()));
           }
           break;
         case "Add Profile":
@@ -383,31 +383,31 @@ class _HomePageState extends State<HomePage> {
       case 0:
         {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage()));
+              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
         }
         break;
       case 1:
         {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateAccount()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
         }
         break;
       case 2:
         {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
         }
         break;
       case 3:
         {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateAccount()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
         }
         break;
       case 4:
         {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateAccount()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
         }
         break;
       default:

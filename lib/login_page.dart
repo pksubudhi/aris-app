@@ -19,21 +19,26 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     double heightScale = Styles.displayHeight(context) / 896;
-    return Scaffold(
+    return new WillPopScope(
+      onWillPop: () async => false,
+      child: new Scaffold(
         // appBar: DefaultAppBar(),
 
         backgroundColor: Styles.pageBackground,
         body: SingleChildScrollView(
-            child: Column(
-          children: [
-            SizedBox(height: heightScale * 110), // try Spacer(flex: 110) ?
-            _arisLogo(context),
-            SizedBox(height: heightScale * 54),
-            _loginForm(),
-            SizedBox(height: heightScale * 88),
-            _loginHelp(context),
-          ],
-        )));
+          child: Column(
+            children: [
+              SizedBox(height: heightScale * 110), // try Spacer(flex: 110) ?
+              _arisLogo(context),
+              SizedBox(height: heightScale * 54),
+              _loginForm(),
+              SizedBox(height: heightScale * 88),
+              _loginHelp(context),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _arisLogo(BuildContext context) {
@@ -85,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
     double sizeScale = Styles.screenSize(context) / 987;
     return TextFormField(
       decoration: InputDecoration(
-        errorStyle: TextStyle(fontSize: 12*sizeScale),
+        errorStyle: TextStyle(fontSize: 12 * sizeScale),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.cyan),
         ),
@@ -126,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextFormField(
       //controller: _passwordController,
       decoration: InputDecoration(
-          errorStyle: TextStyle(fontSize: 12*sizeScale),
+          errorStyle: TextStyle(fontSize: 12 * sizeScale),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.cyan),
           ),
@@ -147,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Icon(
                 _showPassword ? Icons.visibility : Icons.visibility_off,
-                size: 24*sizeScale,
+                size: 24 * sizeScale,
               ))),
       obscureText: !_showPassword,
       style: TextStyle(
