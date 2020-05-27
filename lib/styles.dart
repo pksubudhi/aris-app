@@ -77,6 +77,13 @@ class Styles {
     fontFamily: font,
     fontSize: textSizeBodyM,
     color: arisBlack,
+    fontWeight: FontWeight.normal,
+    decoration: TextDecoration.underline,
+  );
+  static final infoBlackBold = TextStyle(
+    fontFamily: font,
+    fontSize: textSizeBodyM,
+    color: arisBlack,
     fontWeight: FontWeight.w700,
   );
   static final homeTitles = TextStyle(
