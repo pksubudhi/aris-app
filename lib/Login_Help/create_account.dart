@@ -284,7 +284,7 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   InputDecoration fieldDecoration(String labelText) {
-    //the common field decoration used by all input fields
+    //the common field decoration used by all input fields except passwords
     double sizeScale = Styles.screenSize(context) / 987;
     return InputDecoration(
       errorStyle: TextStyle(fontSize: 12 * sizeScale),
