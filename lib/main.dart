@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); // necessary?
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(App());

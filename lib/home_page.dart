@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
             child:
                 Icon(Icons.account_circle, color: Styles.homeBlue, size: 60.0)),
         leading: PopupMenuButton<Choice>(
-          // can "leading" code block be transferred to home_app_bar and called in this file?
           shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.grey),
               borderRadius: BorderRadius.all(Radius.circular(size * 20.0))),

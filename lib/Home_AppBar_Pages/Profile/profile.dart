@@ -25,13 +25,13 @@ class _ProfileState extends State<Profile> {
           currentIndex: _currentIndex,
           iconSize: 40.0 * sizeScale,
           items: [
-            BottomNavigationBarItem(
+            BottomNavigationBarItem( // index 0
                 icon: Icon(Icons.format_list_numbered),
                 title: Text('Activity', textScaleFactor: sizeScale)),
-            BottomNavigationBarItem(
+            BottomNavigationBarItem( // index 1
                 icon: Icon(Icons.assessment),
                 title: Text('Stats', textScaleFactor: sizeScale)),
-            BottomNavigationBarItem(
+            BottomNavigationBarItem( // index 2
                 icon: Icon(Icons.account_circle),
                 title: Text('Info', textScaleFactor: sizeScale)),
           ],

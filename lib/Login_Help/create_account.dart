@@ -7,19 +7,16 @@ class CreateAccount extends StatefulWidget {
   createState() => _CreateAccountState();
 }
 
-
 class _CreateAccountState extends State<CreateAccount> {
-  String _firstName = 'First Name';
-  String _lastName = 'Last Name';
-  String _orgName = 'Organization Name';
-  String _address = 'Address';
-  String _orgMemberID = 'ARIS User ID';
-  String _phoneNum = 'Phone Number';
+  String _firstName;
+  String _lastName;
+  String _orgName;
+  String _address;
+  String _orgMemberID;
+  String _phoneNum;
   String _email;
   String _password;
-  String _idOfField;
   bool _showPassword = false;
-
 
   final GlobalKey<FormState> _accountKey = GlobalKey<FormState>();
   final TextEditingController _pass = TextEditingController();
@@ -27,82 +24,80 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScale = Styles.displayHeight(context) / 896;
     return Scaffold(
         appBar: DefaultAppBar(),
         backgroundColor: Styles.pageBackground,
-        body: SingleChildScrollView( // also consider using ListView in stead of ScrollView.
+        body: SingleChildScrollView(
+            // also consider using ListView in stead of ScrollView.
             child: Column(
           children: [
             _arisLogo(context),
-            SizedBox(height: 20),
+            SizedBox(height: heightScale * 20),
             _accountForm(context),
           ],
         )));
   }
-
-/* //SIZING CONSISTENCY FOR DIFFERENT DEVICES
-  Size displaySize(BuildContext context) {
-    debugPrint('Size = ' + MediaQuery.of(context).size.toString());
-    return MediaQuery.of(context).size;
-  }
-  double displayHeight(BuildContext context) {
-    debugPrint('Height = ' + displaySize(context).height.toString());
-    return displaySize(context).height;
-  }
-  double displayWidth(BuildContext context) {
-    debugPrint('Width = ' + displaySize(context).width.toString());
-    return displaySize(context).width;
-  }*/
 
   Widget _arisLogo(BuildContext context) {
     return Styles.arisLogo(context);
   }
 
   Widget _accountForm(BuildContext context) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    double heightScale = Styles.displayHeight(context) / 896;
+    double widthScale = Styles.displayWidth(context) / 414;
     return Container(
-        margin: EdgeInsets.all(50),
+        margin: EdgeInsets.all(sizeScale * 50),
         child: Form(
             key: _accountKey,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                 Container (
-                    child:
-                  Text('Create Your Account', style: Styles.subTitle, textAlign: TextAlign.left)),
-                  SizedBox(height: 30),
-                  field(_firstName),
-                  SizedBox(height: 30),
-                  field(_lastName),
-                  SizedBox(height: 30),
-                  field(_orgName),
-                  SizedBox(height: 30),
-                  field(_address),
-                  SizedBox(height: 30),
-                  field(_orgMemberID),
-                  SizedBox(height: 30),
-                  field(_phoneNum),
-                  SizedBox(height: 30),
-                  emailField(),
-                  SizedBox(height: 30),
-                  passwordField(),
-                  SizedBox(height: 30),
-                  confPasswordField(),
-                  SizedBox(height: 50),
                   Container(
-                      constraints:
-                          BoxConstraints.expand(width: 320.0, height: 50.0),
+                      child: Text('Create Your Account',
+                          style: Styles.subTitle,
+                          textAlign: TextAlign.left,
+                          textScaleFactor: sizeScale)),
+                  SizedBox(height: heightScale * 30),
+                  firstNameField(),
+                  SizedBox(height: heightScale * 30),
+                  lastNameField(),
+                  SizedBox(height: heightScale * 30),
+                  orgNameField(),
+                  SizedBox(height: heightScale * 30),
+                  addressField(),
+                  SizedBox(height: heightScale * 30),
+                  orgMemberIDField(),
+                  SizedBox(height: heightScale * 30),
+                  phoneNumField(),
+                  SizedBox(height: heightScale * 30),
+                  emailField(),
+                  SizedBox(height: heightScale * 30),
+                  passwordField(),
+                  SizedBox(height: heightScale * 30),
+                  confPasswordField(),
+                  SizedBox(height: heightScale * 30),
+                  Container(
+                      constraints: BoxConstraints.expand(
+                          width: widthScale * 320.0,
+                          height: heightScale * 50.0),
                       child: RaisedButton(
                         // in the future make this button rounded
                         color: Colors.cyan,
-                        child: Text('Submit', style: Styles.loginButton),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                        child: Text('Submit',
+                            style: Styles.loginButton,
+                            textScaleFactor: sizeScale),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(sizeScale * 30.0)),
                         onPressed: () {
                           if (!_accountKey.currentState.validate()) {
                             return;
                           }
                           _accountKey.currentState.save();
 
-                          print('First name: $_idOfField');
+                          print('First name: $_firstName');
                           print('Last name: $_lastName');
                           print('email: $_email');
                           print('Organization Name: $_orgName');
@@ -115,54 +110,119 @@ class _CreateAccountState extends State<CreateAccount> {
                 ])));
   }
 
-  Widget field(String fieldID) {
+  Widget firstNameField() {
     return TextFormField(
-      decoration: InputDecoration(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.cyan),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.cyan),
-        ),
-        labelText: fieldID,
-        labelStyle: Styles.info,
-        border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Styles.arisBlue)),
-      ),
+      decoration: fieldDecoration('First Name'),
       style: Styles.infoWhite,
       cursorColor: Styles.textWhite,
-      keyboardType: TextInputType.visiblePassword,
-      textAlign: TextAlign.left,
-      // ignore: missing_return
+      keyboardType: TextInputType.emailAddress,
       validator: (String value) {
         if (value.isEmpty) {
-          return '$fieldID is Required';
+          return 'First Name is Required';
         }
+        return null;
       },
       onSaved: (String value) {
-         _idOfField = value;
+        _firstName = value;
+      },
+    );
+  }
+
+  Widget lastNameField() {
+    return TextFormField(
+      decoration: fieldDecoration('Last Name'),
+      style: Styles.infoWhite,
+      cursorColor: Styles.textWhite,
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Last Name is Required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _lastName = value;
+      },
+    );
+  }
+  Widget orgNameField() {
+    return TextFormField(
+      decoration: fieldDecoration('Organization Name'),
+      style: Styles.infoWhite,
+      cursorColor: Styles.textWhite,
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Organization Name is Required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _orgName = value;
+      },
+    );
+  }
+
+  Widget addressField () {
+    return TextFormField(
+      decoration: fieldDecoration('Address'),
+      style: Styles.infoWhite,
+      cursorColor: Styles.textWhite,
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Address is Required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _address = value;
+      },
+    );
+  }
+
+  Widget orgMemberIDField() {
+    return TextFormField(
+      decoration: fieldDecoration('ARIS User ID'),
+      style: Styles.infoWhite,
+      cursorColor: Styles.textWhite,
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'ARIS User ID is Required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _orgMemberID = value;
+      },
+    );
+  }
+
+  Widget phoneNumField() {
+    return TextFormField(
+      decoration: fieldDecoration('Phone Number'),
+      style: Styles.infoWhite,
+      cursorColor: Styles.textWhite,
+      keyboardType: TextInputType.emailAddress,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Phone Number is Required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _phoneNum = value;
       },
     );
   }
 
   Widget emailField() {
     return TextFormField(
-      decoration: InputDecoration(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.cyan),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.cyan),
-        ),
-        labelText: 'Email',
-        labelStyle: Styles.info,
-        border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Styles.arisBlue)),
-      ),
+      decoration: fieldDecoration('Email'),
       style: Styles.infoWhite,
       cursorColor: Styles.textWhite,
       keyboardType: TextInputType.emailAddress,
-      // ignore: missing_return
       validator: (String value) {
         if (value.isEmpty) {
           return 'An Email Address is Required';
@@ -183,24 +243,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget passwordField() {
     return TextFormField(
       controller: _pass,
-      decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.cyan),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.cyan),
-          ),
-          labelText: 'Password',
-          labelStyle: Styles.info,
-          suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _showPassword = !_showPassword;
-                });
-              },
-              child: Icon(
-                _showPassword ? Icons.visibility : Icons.visibility_off,
-              ))),
+      decoration: passwordDecoration('Password'),
       obscureText: !_showPassword,
       style: Styles.infoWhite,
       cursorColor: Styles.textWhite,
@@ -221,24 +264,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget confPasswordField() {
     return TextFormField(
       controller: _confirmPass,
-      decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.cyan),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.cyan),
-          ),
-          labelText: 'Confirm Password',
-          labelStyle: Styles.info,
-          suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _showPassword = !_showPassword;
-                });
-              },
-              child: Icon(
-                _showPassword ? Icons.visibility : Icons.visibility_off,
-              ))),
+      decoration: passwordDecoration('Confirm Password'),
       obscureText: !_showPassword,
       style: Styles.infoWhite,
       cursorColor: Styles.textWhite,
@@ -255,5 +281,47 @@ class _CreateAccountState extends State<CreateAccount> {
         _password = value;
       },
     );
+  }
+
+  InputDecoration fieldDecoration(String labelText) {
+    //the common field decoration used by all input fields
+    double sizeScale = Styles.screenSize(context) / 987;
+    return InputDecoration(
+      errorStyle: TextStyle(fontSize: 12 * sizeScale),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.cyan),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.cyan),
+      ),
+      labelText: labelText,
+      labelStyle: Styles.info(Styles.textSizeInfo * sizeScale),
+      border:
+          UnderlineInputBorder(borderSide: BorderSide(color: Styles.arisBlue)),
+    );
+  }
+
+  InputDecoration passwordDecoration(String labelText) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    return InputDecoration(
+        errorStyle: TextStyle(fontSize: 12 * sizeScale),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+        labelText: labelText,
+        labelStyle: Styles.info(Styles.textSizeInfo * sizeScale),
+        suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                _showPassword = !_showPassword;
+              });
+            },
+            child: Icon(
+              _showPassword ? Icons.visibility : Icons.visibility_off,
+              size: 24 * sizeScale,
+            )));
   }
 }

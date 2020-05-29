@@ -4,7 +4,7 @@ import 'styles.dart';
 import 'Login_Help/forgot_password.dart';
 import 'Login_Help/create_account.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatefulWidget { // Other Classes call this to access this folder.
   @override
   createState() => _LoginPageState();
 }
@@ -12,14 +12,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _username = "Username";
   String _password = "Password";
-  bool _showPassword = false;
+  bool _showPassword = false; // for hiding password on form
 
-  final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _loginKey = GlobalKey<FormState>(); // Conserves state across different widget Trees. can be called to validate or save stateful Widget data of any widget (in this case a FormState widget).
 
   @override
   Widget build(BuildContext context) {
     double heightScale = Styles.displayHeight(context) / 896;
-    return new WillPopScope(
+    return new WillPopScope(   // cancels popping functionality on this page (there is no back button)
       onWillPop: () async => false,
       child: new Scaffold(
         // appBar: DefaultAppBar(),
@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: heightScale * 110), // try Spacer(flex: 110) ?
+              SizedBox(height: heightScale * 110),
               _arisLogo(context),
               SizedBox(height: heightScale * 54),
               _loginForm(),
@@ -73,10 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius:
                                 BorderRadius.circular(sizeScale * 30.0)),
                         onPressed: () {
-                          if (!_loginKey.currentState.validate()) {
+                          if (!_loginKey.currentState.validate()) { // checks login's preserved state to see if it's input is valid
                             return;
                           }
-                          _loginKey.currentState.save();
+                          _loginKey.currentState.save(); // Saves the input associated to the form Key and calls onSaved function
 
                           print('Username: $_username');
                           print('Password: $_password');
@@ -147,14 +147,14 @@ class _LoginPageState extends State<LoginPage> {
           suffixIcon: GestureDetector(
               onTap: () {
                 setState(() {
-                  _showPassword = !_showPassword;
+                  _showPassword = !_showPassword; // toggle showing password when eye button is pressed.
                 });
               },
               child: Icon(
-                _showPassword ? Icons.visibility : Icons.visibility_off,
+                _showPassword ? Icons.visibility : Icons.visibility_off, // eye button icon.
                 size: 24 * sizeScale,
               ))),
-      obscureText: !_showPassword,
+      obscureText: !_showPassword,  //When "true", makes the password appear as private dot characters.
       style: TextStyle(
         fontFamily: Styles.font,
         fontSize: Styles.textSizeBodyM * sizeScale,
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
               onTap: () => _navigateToPasswordHelp(context),
               child: Container(
                   //margin: EdgeInsets.all(50),
-                  child: RichText(
+                  child: RichText(  // Allows text strings of varying TEXTSTYLES to be written in one line.
                       textScaleFactor: sizeScale,
                       text: TextSpan(
                           style: Styles.loginHelp,

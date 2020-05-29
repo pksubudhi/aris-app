@@ -19,6 +19,7 @@ class _PasswordHelpState extends State<PasswordHelp> {
 
   @override
   Widget build(BuildContext context) {
+    double heightScale = Styles.displayHeight(context) / 896;
     return Scaffold(
         appBar: DefaultAppBar(),
         backgroundColor: Styles.pageBackground,
@@ -26,7 +27,7 @@ class _PasswordHelpState extends State<PasswordHelp> {
             child: Column(
               children: [
                 _arisLogo(context),
-                SizedBox(height: 40),
+                SizedBox(height: heightScale* 40),
                 _emailForm(context),
               ],
             )));
@@ -37,24 +38,27 @@ class _PasswordHelpState extends State<PasswordHelp> {
   }
 
   Widget _emailForm(BuildContext context) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    double heightScale = Styles.displayHeight(context) / 896;
+    double widthScale = Styles.displayWidth(context) / 414;
     return Container(
-        margin: EdgeInsets.all(50),
+        margin: EdgeInsets.all(sizeScale*50),
         child: Form(
             key: _emailKey,
             child: Column(
                 children: <Widget>[
-                Text('Reset Password', style: Styles.subTitle),
-                  SizedBox(height: 70),
+                Text('Reset Password', style: Styles.subTitle, textScaleFactor: sizeScale),
+                  SizedBox(height: heightScale* 70),
                   emailField(),
-                  SizedBox(height: 70),
+                  SizedBox(height: heightScale*70),
                   Container(
                       constraints:
-                      BoxConstraints.expand(width: 320.0, height: 50.0),
+                      BoxConstraints.expand(width: widthScale*320.0, height: heightScale*50.0),
                       child: RaisedButton(
                         // in the future make this button rounded
                         color: Colors.cyan,
-                        child: Text('Send', style: Styles.loginButton),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                        child: Text('Send', style: Styles.loginButton, textScaleFactor: sizeScale),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(sizeScale*30.0)),
                         onPressed: () {
                           if (!_emailKey.currentState.validate()) {
                             return;
@@ -68,8 +72,10 @@ class _PasswordHelpState extends State<PasswordHelp> {
   }
 
   Widget emailField() {
+    double sizeScale = Styles.screenSize(context) / 987;
     return TextFormField(
       decoration: InputDecoration(
+        errorStyle: TextStyle(fontSize: 12 * sizeScale),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.cyan),
         ),
@@ -77,7 +83,7 @@ class _PasswordHelpState extends State<PasswordHelp> {
           borderSide: BorderSide(color: Colors.cyan),
         ),
         labelText: 'Enter Recovery Email',
-        labelStyle: Styles.info,
+        labelStyle: Styles.info(Styles.textSizeInfo*sizeScale),
         border: UnderlineInputBorder(
             borderSide: BorderSide(color: Styles.arisBlue)),
       ),

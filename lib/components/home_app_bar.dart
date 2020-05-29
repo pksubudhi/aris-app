@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../styles.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar({Widget title, Widget leading, List<Widget> actions})
-      : super(title: title, leading: leading, actions: actions);
+  HomeAppBar({Widget title, Widget leading, List<Widget> actions}) // this line and the line below initialize parameters that this class will require as inputs whenever it is called.
+      : super(title: title, leading: leading, actions: actions); // whenever HomeAppBarr is called in another class, it's title, leading and action parameters MUST be defined in said class.
 
   @override
   final brightness = Brightness.dark;

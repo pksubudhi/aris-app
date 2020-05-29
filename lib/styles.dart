@@ -3,16 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 
 class Styles {
-  static double fontSizeAdjust(context, double fontConstant) {
-    double adjustedFont = screenSize(context) * fontConstant;
-    return adjustedFont;
-  }
-
-//  static double fontConst() {
-//    double constant = _textSizeAux / 987;
-//    fontSizeAdjust(context, constant);
-//  }
-
   static const double defaultHorizontalPadding = 50;
   static const _textSizeARIS = 56.0; //size
   static const _textSizeTitle = 36.0; //size
@@ -55,12 +45,16 @@ class Styles {
     color: arisBlue,
     fontWeight: FontWeight.w700,
   );
-  static final info = TextStyle(
-    fontFamily: font,
-    fontSize: textSizeInfo,
-    color: textGrey,
-    fontWeight: FontWeight.w700,
-  );
+
+  static info(double fontSize) {
+    return TextStyle(
+      fontFamily: font,
+      fontSize: fontSize,
+      color: textGrey,
+      fontWeight: FontWeight.w700,
+    );
+  }
+
   static final infoWhite = TextStyle(
     fontFamily: font,
     fontSize: textSizeBodyM,
@@ -131,9 +125,8 @@ class Styles {
   );
 
   static arisLogo(BuildContext context) {
-
-    double sizeScale = Styles.screenSize(context)/987;
-    double heightScale = Styles.displayHeight(context)/896;
+    double sizeScale = Styles.screenSize(context) / 987;
+    double heightScale = Styles.displayHeight(context) / 896;
 
     var welcome = List<Widget>();
     welcome.add(RichText(
@@ -146,8 +139,8 @@ class Styles {
       textAlign: TextAlign.center,
     ));
     welcome.add(Text('Atlas Recovery & Intelligence System',
-        textAlign: TextAlign.center, style: info, textScaleFactor: sizeScale));
-    welcome.add(SizedBox(height: heightScale*20));
+        textAlign: TextAlign.center, style: info(textSizeInfo), textScaleFactor: sizeScale));
+    welcome.add(SizedBox(height: heightScale * 20));
     welcome.add(Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -155,7 +148,7 @@ class Styles {
               stops: stops,
               end: Alignment.centerLeft,
               begin: Alignment.centerRight)),
-      height: heightScale*10,
+      height: heightScale * 10,
     ));
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -191,4 +184,7 @@ class Styles {
 //    debugPrint('Width = ' + displaySize(context).width.toString());
     return displaySize(context).width;
   }
+
+//    current spacing value/ current screen size = iphone 11 spacing value / iphone 11 screen size
+//    current spacing value = iphone 11 spacing value * (current screen size / iphone 11 screen size)
 }
