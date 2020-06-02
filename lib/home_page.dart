@@ -2,11 +2,13 @@ import 'package:arisapp/Login_Help/create_account.dart';
 import 'package:arisapp/Login_Help/forgot_password.dart';
 import 'package:arisapp/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'components/home_app_bar.dart';
 import 'components/home_bottom_nav_bar.dart';
 import 'styles.dart';
 import 'Home_AppBar_Pages/Profile/profile.dart';
+import 'home_page_sections/foot_pressure.dart';
+import 'home_page_sections/activity.dart';
+import 'home_page_sections/balance.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -429,7 +431,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PasswordHelp(),
+          builder: (context) => FootPressure(),
         ));
   }
 
@@ -437,7 +439,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PasswordHelp(),
+          builder: (context) => Balance(),
         ));
   }
 
@@ -445,7 +447,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PasswordHelp(),
+          builder: (context) => Activity(),
         ));
   }
 }
