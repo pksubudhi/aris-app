@@ -124,7 +124,7 @@ class BackgroundCollectedPage extends StatelessWidget {
               arguments: arguments,
               argumentsLabels: argumentsLabels,
               values: [
-                lastSamples.map((sample) => sample.waterpHlevel),
+                lastSamples.map((sample) => sample.temperature3),
               ],
               verticalLinesStyle: const PaintStyle(color: Colors.grey),
               additionalMinimalHorizontalLabelsInterval: 0,

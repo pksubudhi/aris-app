@@ -6,13 +6,28 @@ import 'package:scoped_model/scoped_model.dart';
 class DataSample {
   double temperature1;
   double temperature2;
-  double waterpHlevel;
+  double temperature3;
+  double temperature4;
+  double temperature5;
+  double temperature6;
+  double temperature7;
+  double temperature8;
+
+
+
+
   DateTime timestamp;
 
   DataSample({
     this.temperature1,
     this.temperature2,
-    this.waterpHlevel,
+    this.temperature3,
+    this.temperature4,
+    this.temperature5,
+    this.temperature6,
+    this.temperature7,
+    this.temperature8,
+
     this.timestamp,
   });
 }
@@ -41,17 +56,23 @@ class BackgroundCollectingTask extends Model {
   BackgroundCollectingTask._fromConnection(this._connection) {
     _connection.input.listen((data) {
       _buffer += data;
-
+      print(ascii.decode(_buffer));
+      print(_buffer.length);
       while (true) {
         // If there is a sample, and it is full sent
         int index = _buffer.indexOf('t'.codeUnitAt(0));
-        if (index >= 0 && _buffer.length - index >= 7) {
+        if (_buffer.length >= 8) {
           final DataSample sample = DataSample(
-              temperature1: (_buffer[index + 1] + _buffer[index + 2] / 100),
-              temperature2: (_buffer[index + 3] + _buffer[index + 4] / 100),
-              waterpHlevel: (_buffer[index + 5] + _buffer[index + 6] / 100),
+              temperature1: (_buffer[0].toDouble()),
+              temperature2: (_buffer[1].toDouble()),
+              temperature3: (_buffer[2].toDouble()),
+              temperature4: (_buffer[3].toDouble()),
+              temperature5: (_buffer[4].toDouble()),
+              temperature6: (_buffer[5].toDouble()),
+              temperature7: (_buffer[6].toDouble()),
+              temperature8: (_buffer[7].toDouble()),
               timestamp: DateTime.now());
-          _buffer.removeRange(0, index + 7);
+          _buffer.removeRange(0, 8);
 
           samples.add(sample);
           notifyListeners(); // Note: It shouldn't be invoked very often - in this example data comes at every second, but if there would be more data, it should update (including repaint of graphs) in some fixed interval instead of after every sample.
