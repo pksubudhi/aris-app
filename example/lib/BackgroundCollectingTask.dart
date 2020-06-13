@@ -55,13 +55,13 @@ class BackgroundCollectingTask extends Model {
 
   BackgroundCollectingTask._fromConnection(this._connection) {
     _connection.input.listen((data) {
-      _buffer += data;
-      print(ascii.decode(_buffer));
-      print(_buffer.length);
+      _buffer.add(int.parse(ascii.decode(data.toList())));
+      print("Buffer Items: "+ _buffer.toString());
+      print("Buffer Length: " + (_buffer.length).toString());
       while (true) {
         // If there is a sample, and it is full sent
         int index = _buffer.indexOf('t'.codeUnitAt(0));
-        if (_buffer.length >= 8) {
+        if (_buffer.length >= 7) {
           final DataSample sample = DataSample(
               temperature1: (_buffer[0].toDouble()),
               temperature2: (_buffer[1].toDouble()),
@@ -69,13 +69,10 @@ class BackgroundCollectingTask extends Model {
               temperature4: (_buffer[3].toDouble()),
               temperature5: (_buffer[4].toDouble()),
               temperature6: (_buffer[5].toDouble()),
-              temperature7: (_buffer[6].toDouble()),
-              temperature8: (_buffer[7].toDouble()),
               timestamp: DateTime.now());
-          _buffer.removeRange(0, 8);
+          _buffer.removeRange(0, 7);
 
           samples.add(sample);
-          notifyListeners(); // Note: It shouldn't be invoked very often - in this example data comes at every second, but if there would be more data, it should update (including repaint of graphs) in some fixed interval instead of after every sample.
           //print("${sample.timestamp.toString()} -> ${sample.temperature1} / ${sample.temperature2}");
         }
         // Otherwise break
