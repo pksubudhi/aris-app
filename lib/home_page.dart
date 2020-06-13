@@ -26,100 +26,103 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double size = Styles.screenSize(context) / 987;
     double barWidth = Styles.displayWidth(context) / 414;
-
-    return Scaffold(
-      backgroundColor: Styles.pageBackground,
-      appBar: HomeAppBar(
-        title: GestureDetector(
-            onTap: () {
-              setState(() {
-                _navigateToProfile(context);
-              });
-            },
-            child:
-                Icon(Icons.account_circle, color: Styles.homeBlue, size: 60.0)),
-        leading: PopupMenuButton<Choice>(
-          shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.all(Radius.circular(size * 20.0))),
-          icon: Icon(Icons.menu, size: 30.0),
-          color: Styles.pageBackground,
-          onSelected: _menuSelect,
-          itemBuilder: (BuildContext context) {
-            return choices.map((Choice menuSelect) {
-              return PopupMenuItem<Choice>(
-                  value: menuSelect,
-                  child: Column(children: [
-                    Row(children: [
-                      Icon(menuSelect.icon, size: 24),
-                      SizedBox(width: 10 * barWidth),
-                      Text(menuSelect.title, style: Styles.infoWhite)
-                    ])
-                  ]));
-            }).toList();
-          },
-        ),
-        actions: [
-          PopupMenuButton<Choice>(
+    return new WillPopScope(
+      // cancels popping functionality on this page (there is no back button)
+      onWillPop: () async => false,
+      child: new Scaffold(
+        backgroundColor: Styles.pageBackground,
+        appBar: HomeAppBar(
+          title: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _navigateToProfile(context);
+                });
+              },
+              child: Icon(Icons.account_circle,
+                  color: Styles.homeBlue, size: 60.0)),
+          leading: PopupMenuButton<Choice>(
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.grey),
                 borderRadius: BorderRadius.all(Radius.circular(size * 20.0))),
-            icon: Icon(Icons.group_add, size: 40.0),
+            icon: Icon(Icons.menu, size: 30.0),
             color: Styles.pageBackground,
-            onSelected: _accountSelect,
+            onSelected: _menuSelect,
             itemBuilder: (BuildContext context) {
-              return accounts.map((Choice accountSelect) {
+              return choices.map((Choice menuSelect) {
                 return PopupMenuItem<Choice>(
-                    value: accountSelect,
+                    value: menuSelect,
                     child: Column(children: [
                       Row(children: [
-                        Icon(accountSelect.icon, size: 24),
+                        Icon(menuSelect.icon, size: 24),
                         SizedBox(width: 10 * barWidth),
-                        Text(accountSelect.title, style: Styles.infoWhite)
+                        Text(menuSelect.title, style: Styles.infoWhite)
                       ])
                     ]));
               }).toList();
             },
           ),
-        ],
-      ),
-      body: SizedBox(
-          height: Styles.displayHeight(context),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              footPressure(context),
-              balance(context),
-              activity(context),
-            ],
-          )),
-      bottomNavigationBar: HomeBottomNavBar(
-        currentIndex: _currentIndex,
-        iconSize: 40.0 * size,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none),
-              title: Text('Injury', textScaleFactor: size)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.equalizer),
-              title: Text('Biomech.', textScaleFactor: size)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home', textScaleFactor: size)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.timeline),
-              title: Text('Threshold', textScaleFactor: size)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              title: Text('Recovery', textScaleFactor: size))
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-            print(index);
-            _bottomBarNavigate(index);
-          });
-        },
+          actions: [
+            PopupMenuButton<Choice>(
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.grey),
+                  borderRadius: BorderRadius.all(Radius.circular(size * 20.0))),
+              icon: Icon(Icons.group_add, size: 40.0),
+              color: Styles.pageBackground,
+              onSelected: _accountSelect,
+              itemBuilder: (BuildContext context) {
+                return accounts.map((Choice accountSelect) {
+                  return PopupMenuItem<Choice>(
+                      value: accountSelect,
+                      child: Column(children: [
+                        Row(children: [
+                          Icon(accountSelect.icon, size: 24),
+                          SizedBox(width: 10 * barWidth),
+                          Text(accountSelect.title, style: Styles.infoWhite)
+                        ])
+                      ]));
+                }).toList();
+              },
+            ),
+          ],
+        ),
+        body: SizedBox(
+            height: Styles.displayHeight(context),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                footPressure(context),
+                balance(context),
+                activity(context),
+              ],
+            )),
+        bottomNavigationBar: HomeBottomNavBar(
+          currentIndex: _currentIndex,
+          iconSize: 40.0 * size,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.notifications_none),
+                title: Text('Injury', textScaleFactor: size)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.equalizer),
+                title: Text('Biomech.', textScaleFactor: size)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Home', textScaleFactor: size)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.timeline),
+                title: Text('Threshold', textScaleFactor: size)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_border),
+                title: Text('Recovery', textScaleFactor: size))
+          ],
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+              print(index);
+              _bottomBarNavigate(index);
+            });
+          },
+        ),
       ),
     );
   }
