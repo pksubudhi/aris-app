@@ -50,36 +50,30 @@ class BackgroundCollectingTask extends Model {
   // displaying on chart (or even stright prepare for displaying).
   // @TODO ? should be shrinked at some point, endless colleting data would cause memory shortage.
   List<DataSample> samples = List<DataSample>();
+  List<String> dataList = List<String>();
 
   bool inProgress;
 
   BackgroundCollectingTask._fromConnection(this._connection) {
     _connection.input.listen((data) {
-      _buffer.add(int.parse(ascii.decode(data.toList())));
-      print("Buffer Items: "+ _buffer.toString());
-      print("Buffer Length: " + (_buffer.length).toString());
-      while (true) {
+      dataList = ascii.decode(data).trim().split("\t");
+      print(dataList);
+      print("Buffer Length: " + (dataList.length).toString());
+      if (dataList.isNotEmpty) {
         // If there is a sample, and it is full sent
-        int index = _buffer.indexOf('t'.codeUnitAt(0));
-        if (_buffer.length >= 7) {
+//        _buffer = ascii.decode(data.toList()).trim().split(" ").map(f);
           final DataSample sample = DataSample(
-              temperature1: (_buffer[0].toDouble()),
-              temperature2: (_buffer[1].toDouble()),
-              temperature3: (_buffer[2].toDouble()),
-              temperature4: (_buffer[3].toDouble()),
-              temperature5: (_buffer[4].toDouble()),
-              temperature6: (_buffer[5].toDouble()),
+              temperature1: (double.parse(dataList[0])),
+              temperature2: (double.parse(dataList[1])),
+              temperature3: (double.parse(dataList[2])),
+              temperature4: (double.parse(dataList[3])),
+              temperature5: (double.parse(dataList[4])),
+              temperature6: (double.parse(dataList[5])),
               timestamp: DateTime.now());
-          _buffer.removeRange(0, 7);
-
           samples.add(sample);
           //print("${sample.timestamp.toString()} -> ${sample.temperature1} / ${sample.temperature2}");
         }
         // Otherwise break
-        else {
-          break;
-        }
-      }
     }).onDone(() {
       inProgress = false;
       notifyListeners();
