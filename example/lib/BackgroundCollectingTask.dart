@@ -51,29 +51,42 @@ class BackgroundCollectingTask extends Model {
   // @TODO ? should be shrinked at some point, endless colleting data would cause memory shortage.
   List<DataSample> samples = List<DataSample>();
   List<String> dataList = List<String>();
+  var lineEndIndex;
 
   bool inProgress;
 
   BackgroundCollectingTask._fromConnection(this._connection) {
     _connection.input.listen((data) {
-      dataList = ascii.decode(data).trim().split("\t");
-      print(dataList);
-      print("Buffer Length: " + (dataList.length).toString());
-      if (dataList.isNotEmpty) {
-        // If there is a sample, and it is full sent
-//        _buffer = ascii.decode(data.toList()).trim().split(" ").map(f);
-          final DataSample sample = DataSample(
-              temperature1: (double.parse(dataList[0])),
-              temperature2: (double.parse(dataList[1])),
-              temperature3: (double.parse(dataList[2])),
-              temperature4: (double.parse(dataList[3])),
-              temperature5: (double.parse(dataList[4])),
-              temperature6: (double.parse(dataList[5])),
-              timestamp: DateTime.now());
-          samples.add(sample);
-          //print("${sample.timestamp.toString()} -> ${sample.temperature1} / ${sample.temperature2}");
+      _buffer+=data;
+      print(_buffer);
+      print("Buffer Length: " + (_buffer.length).toString());
+      while (true) {
+        lineEndIndex = _buffer.indexOf(10);
+        if (lineEndIndex == -1) {
+          break;
+        } else {
+          dataList =
+              ascii.decode(_buffer.sublist(0, lineEndIndex + 1)).replaceAll(
+                  "\n", "\t").trim().split("\t");
+          print(dataList);
+          print("DataList Length: " + (dataList.length).toString());
+          _buffer.removeRange(0, lineEndIndex + 1);
+          if (dataList.length == 8) {
+            // If there is a sample, and it is full sent
+            //        _buffer = ascii.decode(data.trim().split(" ");
+            final DataSample sample = DataSample(
+                temperature1: (double.parse(dataList[0])),
+                temperature2: (double.parse(dataList[1])),
+                temperature3: (double.parse(dataList[2])),
+                temperature4: (double.parse(dataList[3])),
+                temperature5: (double.parse(dataList[4])),
+                temperature6: (double.parse(dataList[5])),
+                timestamp: DateTime.now());
+            samples.add(sample);
+            //print("${sample.timestamp.toString()} -> ${sample.temperature1} / ${sample.temperature2}");
+          }
         }
-        // Otherwise break
+      }
     }).onDone(() {
       inProgress = false;
       notifyListeners();
