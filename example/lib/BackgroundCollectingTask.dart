@@ -52,14 +52,20 @@ class BackgroundCollectingTask extends Model {
   List<DataSample> samples = List<DataSample>();
   List<String> dataList = List<String>();
   var lineEndIndex;
+  var lineStartIndex;
 
   bool inProgress;
 
   BackgroundCollectingTask._fromConnection(this._connection) {
     _connection.input.listen((data) {
       _buffer+=data;
-      print(_buffer);
-      print("Buffer Length: " + (_buffer.length).toString());
+      lineStartIndex = _buffer.indexOf(0);
+      if (lineStartIndex == -1){
+      } else {
+        _buffer.removeRange(0, lineStartIndex + 1);
+      }
+//      print(_buffer);
+//      print("Buffer Length: " + (_buffer.length).toString());
       while (true) {
         lineEndIndex = _buffer.indexOf(10);
         if (lineEndIndex == -1) {
@@ -69,7 +75,7 @@ class BackgroundCollectingTask extends Model {
               ascii.decode(_buffer.sublist(0, lineEndIndex + 1)).replaceAll(
                   "\n", "\t").trim().split("\t");
           print(dataList);
-          print("DataList Length: " + (dataList.length).toString());
+//          print("DataList Length: " + (dataList.length).toString());
           _buffer.removeRange(0, lineEndIndex + 1);
           if (dataList.length == 8) {
             // If there is a sample, and it is full sent
