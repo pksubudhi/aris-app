@@ -26,7 +26,7 @@ class Choice {
 }
 
 const List<Choice> choices = const <Choice>[
-  const Choice(title: 'Device\nSettings', icon: Icons.settings),
+  const Choice(title: 'ARISE Connect', icon: Icons.settings_bluetooth),
   const Choice(title: 'Account', icon: Icons.person),
   const Choice(title: 'Sync', icon: Icons.sync),
   const Choice(title: 'Log out', icon: Icons.exit_to_app),

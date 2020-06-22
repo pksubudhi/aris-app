@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'components/home_app_bar.dart';
 import 'components/home_bottom_nav_bar.dart';
 import 'styles.dart';
-import 'Home_AppBar_Pages/Profile/profile.dart';
+import 'Home_AppBar_Pages/title/profile.dart';
 import 'home_page_sections/foot_pressure.dart';
 import 'home_page_sections/activity.dart';
 import 'home_page_sections/balance.dart';
+import 'sync_page/sync.dart';
+import 'home_appbar_pages/leading/bluetooth.dart';
+import 'injury_page/live_alert.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -171,49 +174,31 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(sizeScale * 30),
                         color: Styles.homeBlue),
                     child: Stack(children: [
-                      Align(
-                          alignment: Alignment(0.03, -.8),
-                          child: Text('Left',
-                              style: Styles.infoBlack,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(.75, -.8),
-                          child: Text('Right',
-                              style: Styles.infoBlack,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(-.8, 0),
-                          child: Text('Resting',
-                              style: Styles.infoBlack,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(-.8, .8),
-                          child: Text('Active',
-                              style: Styles.infoBlack,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(.05, 0),
-                          child: Text('28N',
-                              style: Styles.infoBlackBold,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(.7, 0),
-                          child: Text('25N',
-                              style: Styles.infoBlackBold,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(.05, 0.8),
-                          child: Text('50N',
-                              style: Styles.infoBlackBold,
-                              textScaleFactor: sizeScale)),
-                      Align(
-                          alignment: Alignment(.7, 0.8),
-                          child: Text('45N',
-                              style: Styles.infoBlackBold,
-                              textScaleFactor: sizeScale)),
+                      alignData(0.03,-0.8,'Left'),
+                      alignData(0.75,-0.8, 'Right'),
+                      alignData(-0.8,0,'Resting'),
+                      alignData(-0.8,0.8,'Active'),
+                      alignDataBold(0.05,0,'28N'),
+                      alignDataBold(0.7,0,'25N'),
+                      alignDataBold(0.05,0.8,'50N'),
+                      alignDataBold(0.7,0.8,'45N'),
                     ]),
                   )),
             ])));
+  }
+
+  Widget alignData(double x, double y, String text) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    return Align(
+        alignment: Alignment(x, y),
+        child: Text(text, style: Styles.infoBlack, textScaleFactor: sizeScale));
+  }
+
+  Widget alignDataBold(double x, double y, String text) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    return Align(
+        alignment: Alignment(x, y),
+        child: Text(text, style: Styles.infoBlackBold, textScaleFactor: sizeScale));
   }
 
   Widget balance(BuildContext context) {
@@ -333,6 +318,18 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(builder: (context) => CreateAccount()));
           }
           break;
+        case "Sync":
+          {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Sync()));
+          }
+          break;
+        case "ARISE Connect":
+          {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Bluetooth()));
+          }
+          break;
         default:
           {
             //statements;
@@ -387,7 +384,7 @@ class _HomePageState extends State<HomePage> {
       case 0:
         {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
+              context, MaterialPageRoute(builder: (context) => LiveAlert()));
         }
         break;
       case 1:

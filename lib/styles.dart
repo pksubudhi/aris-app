@@ -22,6 +22,8 @@ class Styles {
   static final Color textWhite = _hexToColor('FFFFFF');
   static final Color boxGrey = _hexToColor('4F4F4F');
   static final Color homeBlue = _hexToColor('4FC4DD');
+  static final Color alertRed = _hexToColor('F90707');
+   static final Color cautionYellow = _hexToColor('FFAD0E');
   static final String font = GoogleFonts.roboto.toString();
   static final List<Color> logoLine = [
     arisBlack,
@@ -61,6 +63,12 @@ class Styles {
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
+   static final infoWhitesub = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeBodyB,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+  );
   static final infoWhiteS = TextStyle(
     fontFamily: font,
     fontSize: _textSizeBodyS,
@@ -86,16 +94,60 @@ class Styles {
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
+    static final playerNames = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeARIS,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+  );
+  static final riskGood = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeARIS,
+    color: arisGreen,
+    fontWeight: FontWeight.w700,
+  );
+  static final riskCaution = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeARIS,
+    color: cautionYellow,
+    fontWeight: FontWeight.w700,
+  );
+ static final riskCritical = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeARIS,
+    color: alertRed,
+    fontWeight: FontWeight.w700,
+  );
+
+  static final alertTitles = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeARIS,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+  );
   static final title = TextStyle(
     fontFamily: font,
     fontSize: _textSizeTitle,
     color: textWhite,
     fontWeight: FontWeight.w700,
   );
+  static final titleUnderline = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeTitle,
+    color: textWhite,
+    fontWeight: FontWeight.w700,
+    decoration:TextDecoration.underline,
+  );
   static final subTitle = TextStyle(
     fontFamily: font,
     fontSize: _textSizeBodyB,
     color: textWhite,
+    fontWeight: FontWeight.w700,
+  );
+   static final subTitleBlue = TextStyle(
+    fontFamily: font,
+    fontSize: _textSizeTitle,
+    color: homeBlue,
     fontWeight: FontWeight.w700,
   );
   static final subTitleUnderlined = TextStyle(

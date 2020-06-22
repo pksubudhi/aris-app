@@ -1,4 +1,4 @@
-import 'package:arisapp/Home_AppBar_Pages/Profile/profile.dart';
+import 'package:arisapp/Home_AppBar_Pages/Title/profile.dart';
 import 'package:arisapp/home_page.dart';
 import 'package:arisapp/login_page.dart';
 import 'package:flutter/material.dart';
