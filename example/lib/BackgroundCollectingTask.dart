@@ -59,7 +59,7 @@ class BackgroundCollectingTask extends Model {
   BackgroundCollectingTask._fromConnection(this._connection) {
     _connection.input.listen((data) {
       _buffer+=data;
-      lineStartIndex = _buffer.indexOf(0);
+      lineStartIndex = _buffer.lastIndexWhere((i) => (i>57 || i==0));
       if (lineStartIndex == -1){
       } else {
         _buffer.removeRange(0, lineStartIndex + 1);
