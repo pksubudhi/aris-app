@@ -12,7 +12,7 @@ class _SyncState extends State<Sync> {
 
   @override
   Widget build(BuildContext context) {
-    double sizeScale = Styles.screenSize(context) / 987;
+//    double sizeScale = Styles.screenSize(context) / 987;
 
     return Scaffold(
         backgroundColor: Styles.pageBackground,

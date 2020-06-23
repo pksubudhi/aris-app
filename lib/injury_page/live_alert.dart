@@ -12,7 +12,7 @@ class _LiveAlertState extends State<LiveAlert> {
 
   @override
   Widget build(BuildContext context) {
-    double sizeScale = Styles.screenSize(context) / 987;
+//    double sizeScale = Styles.screenSize(context) / 987;
 
     return Scaffold(
       backgroundColor: Styles.pageBackground,
@@ -46,7 +46,7 @@ class _LiveAlertState extends State<LiveAlert> {
   }
 
   _bottomBarNavigate(BuildContext context, int navSelect) {
-    double heightScale = Styles.displayHeight(context) / 896;
+//    double heightScale = Styles.displayHeight(context) / 896;
     return  ListView(
       children: [
         // _profileName(context),
@@ -84,7 +84,7 @@ class _LiveAlertState extends State<LiveAlert> {
   // }
 
   Widget _activityWorkout(context) {
-    double sizeScale = Styles.screenSize(context) / 987;
+//    double sizeScale = Styles.screenSize(context) / 987;
 
     return Stack(
       children: [
@@ -95,7 +95,7 @@ class _LiveAlertState extends State<LiveAlert> {
   }
 
   Widget _activityRehab(context) {
-    double sizeScale = Styles.screenSize(context) / 987;
+//    double sizeScale = Styles.screenSize(context) / 987;
 
     return Stack(
       children: [
@@ -109,7 +109,7 @@ class _LiveAlertState extends State<LiveAlert> {
   }
 
   Widget _activitySport(context) {
-    double sizeScale = Styles.screenSize(context) / 987;
+//    double sizeScale = Styles.screenSize(context) / 987;
 
     return Stack(
       children: [

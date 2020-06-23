@@ -1,7 +1,7 @@
 import 'package:arisapp/components/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import '../../styles.dart';
-//import 'dart:async';
+import 'dart:async';
 
 class Bluetooth extends StatefulWidget {
   @override
@@ -15,7 +15,6 @@ class _BluetoothState extends State<Bluetooth> {
   bool shinLTapped = false;
   bool thighRTapped = false;
   bool thighLTapped = false;
-  bool connectingBT = false;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +103,7 @@ class _BluetoothState extends State<Bluetooth> {
         sockRTapped = !sockRTapped;
         setState(() {});
       },
-      child: sockRTapped ? loadingConnection(x, y) : noConnection(x, y),
+      child: sockRTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
 
@@ -114,7 +113,7 @@ class _BluetoothState extends State<Bluetooth> {
         sockLTapped = !sockLTapped;
         setState(() {});
       },
-      child: sockLTapped ? loadingConnection(x, y) : noConnection(x, y),
+      child: sockLTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
 
@@ -124,7 +123,7 @@ class _BluetoothState extends State<Bluetooth> {
         shinRTapped = !shinRTapped;
         setState(() {});
       },
-      child: shinRTapped ? loadingConnection(x, y) : noConnection(x, y),
+      child: shinRTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
 
@@ -134,7 +133,7 @@ class _BluetoothState extends State<Bluetooth> {
         shinLTapped = !shinLTapped;
         setState(() {});
       },
-      child: shinLTapped ? loadingConnection(x, y) : noConnection(x, y),
+      child: shinLTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
 
@@ -144,7 +143,7 @@ class _BluetoothState extends State<Bluetooth> {
         thighRTapped = !thighRTapped;
         setState(() {});
       },
-      child: thighRTapped ? loadingConnection(x, y) : noConnection(x, y),
+      child: thighRTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
 
@@ -154,9 +153,16 @@ class _BluetoothState extends State<Bluetooth> {
         thighLTapped = !thighLTapped;
         setState(() {});
       },
-      child: thighLTapped ? loadingConnection(x, y) : noConnection(x, y),
+      child: thighLTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
+
+/*  connecting(double x, double y) {
+    loadconnecting(x, y);
+    Timer(Duration(milliseconds: 3000), () {
+      connected(x, y);
+    });
+  }*/
 
   Widget noConnection(double x, double y) {
     double sizeScale = Styles.screenSize(context) / 987;
@@ -166,26 +172,14 @@ class _BluetoothState extends State<Bluetooth> {
             color: Colors.grey, size: 35 * sizeScale));
   }
 
-  Widget loadingConnection(double x, double y) {
+
+  Widget connecting(double x, double y) {
     double sizeScale = Styles.screenSize(context) / 987;
     return Align(
         alignment: Alignment(x, y),
         child: Icon(Icons.brightness_1,
             color: Styles.arisBlue, size: 35 * sizeScale));
   }
-
-  /*loadingConnection(double x, double y) async {
-    setState(() => this.connectingBT = true);
-    connecting(x, y);
-    Timer(Duration(milliseconds: 3000), () async {
-//    final location = await ____.fetchByID();
-      setState(() {
-        this.connectingBT = true;
-        connected(x, y);
-      });
-      //});
-    });
-  }*/
 
   Widget connected(double x, double y) {
     double sizeScale = Styles.screenSize(context) / 987;
