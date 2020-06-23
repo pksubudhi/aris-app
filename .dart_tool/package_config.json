@@ -14,6 +14,12 @@
       "languageVersion": "2.4"
     },
     {
+      "name": "characters",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "charcode",
       "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.3",
       "packageUri": "lib/",
@@ -27,9 +33,9 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.14.12",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.14.13",
       "packageUri": "lib/",
-      "languageVersion": "2.0"
+      "languageVersion": "2.3"
     },
     {
       "name": "convert",
@@ -39,9 +45,9 @@
     },
     {
       "name": "crypto",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-2.1.4",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-2.1.5",
       "packageUri": "lib/",
-      "languageVersion": "2.1"
+      "languageVersion": "2.3"
     },
     {
       "name": "cupertino_icons",
@@ -56,14 +62,20 @@
       "languageVersion": "2.2"
     },
     {
-      "name": "flutter",
-      "rootUri": "file:///Users/NimaFeizi/flutter/packages/flutter",
+      "name": "file",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/file-5.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.2"
     },
     {
+      "name": "flutter",
+      "rootUri": "file:///Users/NimaFeizi/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    },
+    {
       "name": "flutter_screenutil",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-1.1.0",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_screenutil-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.6"
     },
@@ -75,13 +87,13 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-0.3.10",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.3"
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.0+4",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.12.1",
       "packageUri": "lib/",
       "languageVersion": "2.4"
     },
@@ -92,10 +104,16 @@
       "languageVersion": "2.3"
     },
     {
-      "name": "matcher",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.6",
+      "name": "intl",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.16.1",
       "packageUri": "lib/",
-      "languageVersion": "2.2"
+      "languageVersion": "2.5"
+    },
+    {
+      "name": "matcher",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
     },
     {
       "name": "meta",
@@ -111,21 +129,27 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.7",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.11",
       "packageUri": "lib/",
-      "languageVersion": "2.0"
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "path_provider_linux",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
     },
     {
       "name": "path_provider_macos",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+1",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+3",
       "packageUri": "lib/",
       "languageVersion": "2.1"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-1.0.1",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-1.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.0"
+      "languageVersion": "2.1"
     },
     {
       "name": "pedantic",
@@ -144,6 +168,12 @@
       "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.1"
+    },
+    {
+      "name": "process",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/process-3.0.13",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
     },
     {
       "name": "sky_engine",
@@ -183,9 +213,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.15",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.17",
       "packageUri": "lib/",
-      "languageVersion": "2.4"
+      "languageVersion": "2.7"
     },
     {
       "name": "typed_data",
@@ -200,13 +230,19 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "xdg_directories",
+      "rootUri": "file:///Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
       "name": "arisapp",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-06-22T00:06:21.857372Z",
+  "generated": "2020-06-23T15:53:24.983793Z",
   "generator": "pub",
-  "generatorVersion": "2.9.0-8.0.dev.flutter-2bf3259005"
+  "generatorVersion": "2.9.0-17.0.dev.flutter-7e72c9ae7e"
 }

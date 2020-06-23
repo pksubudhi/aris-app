@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                       alignDataBold(0.05,0,'28N'),
                       alignDataBold(0.7,0,'25N'),
                       alignDataBold(0.05,0.8,'50N'),
-                      alignDataBold(0.7,0.8,'45N'),
+                       alignDataBold(0.7,0.8,'45N'),
                     ]),
                   )),
             ])));
