@@ -10,7 +10,7 @@ import 'home_page_sections/foot_pressure.dart';
 import 'home_page_sections/activity.dart';
 import 'home_page_sections/balance.dart';
 import 'sync_page/sync.dart';
-import 'home_appbar_pages/leading/bluetooth.dart';
+import 'home_appbar_pages/leading/bluetooth/bluetooth.dart';
 import 'injury_page/live_alert.dart';
 
 class HomePage extends StatefulWidget {
