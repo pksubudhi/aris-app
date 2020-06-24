@@ -123,15 +123,15 @@ class _BluetoothState extends State<Bluetooth> {
           children: [
             alignLeftRight(-0.98, -0.9, 'R'),
             alignLeftRight(0.95, -0.9, 'L'),
-            sockR(-1.0, -0.2),
+            sockR(-1.0, -0.3),
             shinR(-1.0, 0.3),
-            thighR(-1.0, 0.8),
-            sockL(1.0, -0.2),
+            thighR(-1.0, 0.9),
+            sockL(1.0, -0.3),
             shinL(1.0, 0.3),
-            thighL(1.0, 0.8),
-            alignDeviceID(-0.05, -0.2, 'ARISE Sock'),
+            thighL(1.0, 0.9),
+            alignDeviceID(-0.05, -0.3, 'ARISE Sock'),
             alignDeviceID(-0.08, 0.3, 'ARISE Shin'),
-            alignDeviceID(0, 0.8, 'ARISE Thigh'),
+            alignDeviceID(0, 0.9, 'ARISE Thigh'),
           ],
         ));
   }
