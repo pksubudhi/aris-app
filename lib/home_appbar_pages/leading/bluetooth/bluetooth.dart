@@ -7,7 +7,7 @@ import '../../../styles.dart';
 import './SelectBondedDevicePage.dart';
 import './BackgroundCollectingTask.dart';
 import './BackgroundCollectedPage.dart';
-
+//@TODO get rid of useless libraries
 //import './DiscoveryPage.dart';
 //import './ChatPage.dart';
 //import 'helpers/linechart.dart';
@@ -25,6 +25,8 @@ class _BluetoothState extends State<Bluetooth> {
 //  String _name = "...";
 //  int _discoverableTimeoutSecondsLeft = 0;
 
+//@TODO Maintain state when user exits the bluetooth page and re-enters it (via "provider" app state management)
+
   bool sockRTapped = false;
   bool sockLTapped = false;
   bool shinRTapped = false;
@@ -34,7 +36,6 @@ class _BluetoothState extends State<Bluetooth> {
   Timer _discoverableTimeoutTimer;
   BackgroundCollectingTask _collectingTask;
   bool _autoAcceptPairingRequests = false;
-
   //@TODO we want the above to always be true for everyone using ARISE App, so they don't have to enter the pin.
 
   @override
@@ -141,12 +142,11 @@ class _BluetoothState extends State<Bluetooth> {
     return Container(
       constraints: BoxConstraints(maxHeight: heightScale * 500),
       child: AspectRatio(
-        aspectRatio: 400 / 500,
+        aspectRatio: 4/5,
         child: Stack(children: [
           Align(
               alignment: Alignment.center,
-              child: Image.asset('assets/male_cartoon.png',
-                  // in case of female user, it would change to female cartoon image.
+              child: Image.asset('assets/male_cartoon.png', // @TODO in case of a female user, it would change to female cartoon image.
                   fit: BoxFit.contain)),
           thighR(-0.145, 0.25),
           shinR(-0.16, 0.6),
@@ -241,7 +241,6 @@ class _BluetoothState extends State<Bluetooth> {
 //    });
 //  }
   Widget noConnection(double x, double y) {
-    // Ideally, no connection will not show any icon at all. Instead, only when discovered by BT will the screen show this grey icon.
     return statusOfConnection(x, y, Icons.check_box_outline_blank, Colors.grey);
   }
 
@@ -249,7 +248,7 @@ class _BluetoothState extends State<Bluetooth> {
     return statusOfConnection(x, y, Icons.brightness_1, Styles.arisBlue);
   }
 
-  Widget connected(double x, double y) {
+  Widget connected(double x, double y) { //@TODO Implement this for when bluetooth successfully connects
     return statusOfConnection(x, y, Icons.check, Styles.arisGreen);
   }
 
