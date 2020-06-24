@@ -4,11 +4,14 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:arisapp/components/home_app_bar.dart';
 import '../../../styles.dart';
+
 //import './DiscoveryPage.dart';
 import './SelectBondedDevicePage.dart';
+
 //import './ChatPage.dart';
 import './BackgroundCollectingTask.dart';
 import './BackgroundCollectedPage.dart';
+
 //import 'helpers/linechart.dart';
 //import 'helpers/paintstyle.dart';
 
@@ -29,14 +32,14 @@ class _BluetoothState extends State<Bluetooth> {
 
   BackgroundCollectingTask _collectingTask;
 
-  bool _autoAcceptPairingRequests =
-      false; // we want this to always be true for everyone using ARISE App, so they don't have to enter the pin.
+  bool _autoAcceptPairingRequests = false;
+  // we want the above to always be true for everyone using ARISE App, so they don't have to enter the pin.
 
   @override
   void initState() {
     super.initState();
 
-    // Get current state
+//     Get current state
 //    FlutterBluetoothSerial.instance.state.then((state) {
 //      setState(() {
 //        _bluetoothState = state;
