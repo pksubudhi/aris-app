@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:arisapp/components/home_app_bar.dart';
+import '../../../styles.dart';
 
 import './BluetoothDeviceListEntry.dart';
 
@@ -117,8 +119,8 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
     ))
         .toList();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select device'),
+//      backgroundColor: Styles.pageBackground,
+      appBar: HomeAppBar(title: Text('Select Device', style: Styles.title),
         actions: <Widget>[
           _isDiscovering
               ? FittedBox(
