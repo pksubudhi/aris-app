@@ -23,7 +23,7 @@ class Styles {
   static final Color boxGrey = _hexToColor('4F4F4F');
   static final Color homeBlue = _hexToColor('4FC4DD');
   static final Color alertRed = _hexToColor('F90707');
-   static final Color cautionYellow = _hexToColor('FFAD0E');
+  static final Color cautionYellow = _hexToColor('FFAD0E');
   static final String font = GoogleFonts.roboto.toString();
   static final List<Color> logoLine = [
     arisBlack,

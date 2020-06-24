@@ -19,7 +19,6 @@ class Bluetooth extends StatefulWidget {
 }
 
 class _BluetoothState extends State<Bluetooth> {
-
   //@ TODO Below code may be useless.
 //  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
 //  String _address = "...";
@@ -35,6 +34,7 @@ class _BluetoothState extends State<Bluetooth> {
   Timer _discoverableTimeoutTimer;
   BackgroundCollectingTask _collectingTask;
   bool _autoAcceptPairingRequests = false;
+
   //@TODO we want the above to always be true for everyone using ARISE App, so they don't have to enter the pin.
 
   @override
@@ -104,7 +104,7 @@ class _BluetoothState extends State<Bluetooth> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _writtenBT(context),
-            SizedBox(height: heightScale * 50),
+            SizedBox(height: heightScale * 10),
             _visualBT(context),
           ],
         ),
@@ -117,44 +117,46 @@ class _BluetoothState extends State<Bluetooth> {
     double widthScale = Styles.displayWidth(context) / 414;
     return Container(
         margin: EdgeInsets.fromLTRB(widthScale * 40, 0, widthScale * 40, 0),
-        constraints: BoxConstraints.expand(height: heightScale * 200),
+        constraints: BoxConstraints.expand(height: heightScale * 240),
 //        decoration: BoxDecoration(color: Colors.amber),
         child: Stack(
           children: [
-            alignLeftRight(-0.98, -0.8, 'R'),
-            alignLeftRight(0.95, -0.8, 'L'),
-            sockR(-1.0, 0),
-            shinR(-1.0, 0.5),
-            thighR(-1.0, 1.0),
-            sockL(1.0, 0),
-            shinL(1.0, 0.5),
-            thighL(1.0, 1.0),
-            alignDeviceID(-0.05, 0, 'ARISE Sock'),
-            alignDeviceID(-0.08, 0.5, 'ARISE Shin'),
-            alignDeviceID(0, 1.0, 'ARISE Thigh'),
+            alignLeftRight(-0.98, -0.9, 'R'),
+            alignLeftRight(0.95, -0.9, 'L'),
+            sockR(-1.0, -0.2),
+            shinR(-1.0, 0.3),
+            thighR(-1.0, 0.8),
+            sockL(1.0, -0.2),
+            shinL(1.0, 0.3),
+            thighL(1.0, 0.8),
+            alignDeviceID(-0.05, -0.2, 'ARISE Sock'),
+            alignDeviceID(-0.08, 0.3, 'ARISE Shin'),
+            alignDeviceID(0, 0.8, 'ARISE Thigh'),
           ],
         ));
   }
 
   Widget _visualBT(context) {
     double heightScale = Styles.displayHeight(context) / 896;
-    double widthScale = Styles.displayWidth(context) / 414;
     return Container(
-        constraints: BoxConstraints(maxHeight: heightScale * 500, maxWidth: widthScale * 350),
-//    decoration: BoxDecoration(color: Colors.pinkAccent),
+      constraints: BoxConstraints(maxHeight: heightScale * 500),
+      child: AspectRatio(
+        aspectRatio: 400 / 500,
         child: Stack(children: [
           Align(
               alignment: Alignment.center,
               child: Image.asset('assets/male_cartoon.png',
                   // in case of female user, it would change to female cartoon image.
                   fit: BoxFit.contain)),
-          thighR(-0.14, 0.25),
-          shinR(-0.155, 0.6),
+          thighR(-0.145, 0.25),
+          shinR(-0.16, 0.6),
           sockR(-0.14, 0.95),
-          thighL(0.135, 0.25),
+          thighL(0.14, 0.25),
           shinL(0.15, 0.6),
           sockL(0.14, 0.95),
-        ]));
+        ]),
+      ),
+    );
   }
 
   Widget alignLeftRight(double x, double y, String text) {
@@ -169,7 +171,7 @@ class _BluetoothState extends State<Bluetooth> {
     return Align(
         alignment: Alignment(x, y),
         child:
-        Text(text, style: Styles.infoWhitesub, textScaleFactor: sizeScale));
+            Text(text, style: Styles.infoWhitesub, textScaleFactor: sizeScale));
   }
 
   Widget sockR(double x, double y) {
@@ -238,32 +240,26 @@ class _BluetoothState extends State<Bluetooth> {
 //      connected(x, y);
 //    });
 //  }
-
   Widget noConnection(double x, double y) {
     // Ideally, no connection will not show any icon at all. Instead, only when discovered by BT will the screen show this grey icon.
-    double sizeScale = Styles.screenSize(context) / 987;
-    return Align(
-        alignment: Alignment(x, y),
-        child: Icon(Icons.check_box_outline_blank,
-            color: Colors.grey, size: 35 * sizeScale));
+    return statusOfConnection(x, y, Icons.check_box_outline_blank, Colors.grey);
   }
 
   Widget connecting(double x, double y) {
-    double sizeScale = Styles.screenSize(context) / 987;
-    return Align(
-        alignment: Alignment(x, y),
-        child: Icon(Icons.brightness_1,
-            color: Styles.arisBlue, size: 35 * sizeScale));
+    return statusOfConnection(x, y, Icons.brightness_1, Styles.arisBlue);
   }
 
   Widget connected(double x, double y) {
-    double sizeScale = Styles.screenSize(context) / 987;
-    return Align(
-        alignment: Alignment(x, y),
-        child:
-        Icon(Icons.check, color: Styles.arisGreen, size: 35 * sizeScale));
+    return statusOfConnection(x, y, Icons.check, Styles.arisGreen);
   }
 
+  Widget statusOfConnection(double x, double y, IconData icon, Color color) {
+    double sizeScale = Styles.screenSize(context) / 987;
+    return Align(
+      alignment: Alignment(x, y),
+      child: Icon(icon, color: color, size: 40 * sizeScale),
+    );
+  }
 
 //@TODO below code may be useless.
 //            Divider(),
@@ -432,18 +428,12 @@ class _BluetoothState extends State<Bluetooth> {
 //            Divider(),
 //            ListTile(title: const Text('Multiple connections example')),
 
-
   Widget connectingAriseMkI(double x, double y) {
-    double sizeScale = Styles.screenSize(context) / 987;
     return GestureDetector(
       // connect state = grey box, disconnect state = green check-mark
       child: ((_collectingTask != null && _collectingTask.inProgress)
-          ? Align(
-          alignment: Alignment(x, y),child: Icon(Icons.check,
-          color: Styles.arisGreen, size: 35 * sizeScale))
-          : Align(
-          alignment: Alignment(x, y),child: Icon(Icons.check_box_outline_blank,
-          color: Colors.grey, size: 35 * sizeScale))),
+          ? connected(x, y)
+          : noConnection(x, y)),
       onTap: () async {
         // change disconnect functionality to onForcePressEnd
         if (_collectingTask != null && _collectingTask.inProgress) {
@@ -453,7 +443,7 @@ class _BluetoothState extends State<Bluetooth> {
           });
         } else {
           final BluetoothDevice selectedDevice =
-          await Navigator.of(context).push(
+              await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
                 return SelectBondedDevicePage(checkAvailability: false);
