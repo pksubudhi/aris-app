@@ -20,9 +20,9 @@ class Bluetooth extends StatefulWidget {
 
 class _BluetoothState extends State<Bluetooth> {
   //@ TODO Below code may be useless.
-//  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-//  String _address = "...";
-//  String _name = "...";
+  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
+  String _address = "...";
+  String _name = "...";
 //  int _discoverableTimeoutSecondsLeft = 0;
 
 //@TODO Maintain state when user exits the bluetooth page and re-enters it (via "provider" app state management)
@@ -44,33 +44,33 @@ class _BluetoothState extends State<Bluetooth> {
 
     //@TODO Below code may be useless.
 //     Get current state
-//    FlutterBluetoothSerial.instance.state.then((state) {
-//      setState(() {
-//        _bluetoothState = state;
-//      });
-//    });
-//
-//    Future.doWhile(() async {
-//      // Wait if adapter not enabled
-//      if (await FlutterBluetoothSerial.instance.isEnabled) {
-//        return false;
-//      }
-//      await Future.delayed(Duration(milliseconds: 0xDD));
-//      return true;
-//    }).then((_) {
-//      // Update the address field
-//      FlutterBluetoothSerial.instance.address.then((address) {
-//        setState(() {
-//          _address = address;
-//        });
-//      });
-//    });
-//
-//    FlutterBluetoothSerial.instance.name.then((name) {
-//      setState(() {
-//        _name = name;
-//      });
-//    });
+    FlutterBluetoothSerial.instance.state.then((state) {
+      setState(() {
+        _bluetoothState = state;
+      });
+    });
+
+    Future.doWhile(() async {
+      // Wait if adapter not enabled
+      if (await FlutterBluetoothSerial.instance.isEnabled) {
+        return false;
+      }
+      await Future.delayed(Duration(milliseconds: 0xDD));
+      return true;
+    }).then((_) {
+      // Update the address field
+      FlutterBluetoothSerial.instance.address.then((address) {
+        setState(() {
+          _address = address;
+        });
+      });
+    });
+
+    FlutterBluetoothSerial.instance.name.then((name) {
+      setState(() {
+        _name = name;
+      });
+    });
 
     // Listen for futher state changes
     FlutterBluetoothSerial.instance
@@ -87,7 +87,7 @@ class _BluetoothState extends State<Bluetooth> {
   @override
   void dispose() {
     FlutterBluetoothSerial.instance.setPairingRequestHandler(null);
-    _collectingTask?.dispose();
+//    _collectingTask?.dispose();
     _discoverableTimeoutTimer?.cancel();
     super.dispose();
   }
@@ -190,7 +190,7 @@ class _BluetoothState extends State<Bluetooth> {
         sockLTapped = !sockLTapped;
         setState(() {});
       },
-      child: sockLTapped ? connectingAriseMkI(x, y) : noConnection(x, y),
+      child: sockLTapped ? connectingLeftAriseMkI(x, y) : noConnection(x, y),
     );
   }
 
@@ -427,7 +427,7 @@ class _BluetoothState extends State<Bluetooth> {
 //            Divider(),
 //            ListTile(title: const Text('Multiple connections example')),
 
-  Widget connectingAriseMkI(double x, double y) {
+  Widget connectingLeftAriseMkI(double x, double y) {
     return GestureDetector(
       // connect state = grey box, disconnect state = green check-mark
       child: ((_collectingTask != null && _collectingTask.inProgress)
@@ -440,7 +440,7 @@ class _BluetoothState extends State<Bluetooth> {
           setState(() {
 //       Update for `_collectingTask.inProgress`
           });
-        } else {
+        } else { //@TODO, possible to use MAC address for instant connection? How about different ARISE units having different MAC addresses?
           final BluetoothDevice selectedDevice =
               await Navigator.of(context).push(
             MaterialPageRoute(
