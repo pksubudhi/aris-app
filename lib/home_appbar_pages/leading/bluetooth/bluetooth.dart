@@ -441,15 +441,27 @@ class _BluetoothState extends State<Bluetooth> {
 //       Update for `_collectingTask.inProgress`
           });
         } else { //@TODO, possible to use MAC address for instant connection? How about different ARISE units having different MAC addresses?
-          final BluetoothDevice selectedDevice =
-              await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return SelectBondedDevicePage(checkAvailability: false);
-              },
-            ),
+//          final BluetoothDevice selectedDevice =
+//              await Navigator.of(context).push(
+//            MaterialPageRoute(
+//              builder: (context) {
+//                return SelectBondedDevicePage(checkAvailability: false);
+//              },
+//            ),
+//          );
+          FlutterBluetoothSerial.instance
+              .getBondedDevices()
+              .then((List<BluetoothDevice> bondedDevices)
           );
-
+          for (device in bondedDevices){
+            if (device.address.toString() == "00:14:03:05:F2:5A"){
+              final BluetoothDevice selectedDevice = device;
+            }
+            else{
+              final BluetoothDevice selectedDevice = null;
+              print("Unable to find BT")
+            }
+          }
           if (selectedDevice != null) {
             await _startBackgroundTask(context, selectedDevice);
             setState(() {
