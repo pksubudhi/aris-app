@@ -3,11 +3,12 @@
 import 'package:arisapp/login_page.dart';
 import 'package:flutter/material.dart';
 import 'home_appbar_pages/leading/bluetooth/bluetooth.dart';
+import 'home_page.dart';
 
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home:LoginPage());
+    return MaterialApp(home:HomePage());
   }
 }

@@ -7,6 +7,7 @@ import '../../../styles.dart';
 import './SelectBondedDevicePage.dart';
 import './BackgroundCollectingTask.dart';
 import './BackgroundCollectedPage.dart';
+
 //@TODO get rid of useless libraries
 //import './DiscoveryPage.dart';
 //import './ChatPage.dart';
@@ -18,11 +19,28 @@ class Bluetooth extends StatefulWidget {
   createState() => _BluetoothState();
 }
 
+class _DeviceWithAvailability extends BluetoothDevice {
+  BluetoothDevice device;
+  int rssi;
+
+  _DeviceWithAvailability(this.device, [this.rssi]);
+}
+
+enum _DeviceAvailability {
+  maybe,
+  yes,
+}
+
 class _BluetoothState extends State<Bluetooth> {
+  List<BluetoothDevice> devices = List<BluetoothDevice>();
+
   //@ TODO Below code may be useless.
+  // List<BluetoothDevice> bondedDevices = [];
+  //BluetoothDevice = device;
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
   String _address = "...";
   String _name = "...";
+
 //  int _discoverableTimeoutSecondsLeft = 0;
 
 //@TODO Maintain state when user exits the bluetooth page and re-enters it (via "provider" app state management)
@@ -36,6 +54,7 @@ class _BluetoothState extends State<Bluetooth> {
   Timer _discoverableTimeoutTimer;
   BackgroundCollectingTask _collectingTask;
   bool _autoAcceptPairingRequests = false;
+
   //@TODO we want the above to always be true for everyone using ARISE App, so they don't have to enter the pin.
 
   @override
@@ -142,11 +161,12 @@ class _BluetoothState extends State<Bluetooth> {
     return Container(
       constraints: BoxConstraints(maxHeight: heightScale * 500),
       child: AspectRatio(
-        aspectRatio: 4/5,
+        aspectRatio: 4 / 5,
         child: Stack(children: [
           Align(
               alignment: Alignment.center,
-              child: Image.asset('assets/male_cartoon.png', // @TODO in case of a female user, it would change to female cartoon image.
+              child: Image.asset('assets/male_cartoon.png',
+                  // @TODO in case of a female user, it would change to female cartoon image.
                   fit: BoxFit.contain)),
           thighR(-0.145, 0.25),
           shinR(-0.16, 0.6),
@@ -180,7 +200,7 @@ class _BluetoothState extends State<Bluetooth> {
         sockRTapped = !sockRTapped;
         setState(() {});
       },
-      child: sockRTapped ? connecting(x, y) : noConnection(x, y),
+      child: sockRTapped ? charts(context) : noConnection(x, y),
     );
   }
 
@@ -248,7 +268,8 @@ class _BluetoothState extends State<Bluetooth> {
     return statusOfConnection(x, y, Icons.brightness_1, Styles.arisBlue);
   }
 
-  Widget connected(double x, double y) { //@TODO Implement this for when bluetooth successfully connects
+  Widget connected(double x, double y) {
+    //@TODO Implement this for when bluetooth successfully connects
     return statusOfConnection(x, y, Icons.check, Styles.arisGreen);
   }
 
@@ -440,26 +461,26 @@ class _BluetoothState extends State<Bluetooth> {
           setState(() {
 //       Update for `_collectingTask.inProgress`
           });
-        } else { //@TODO, possible to use MAC address for instant connection? How about different ARISE units having different MAC addresses?
-//          final BluetoothDevice selectedDevice =
-//              await Navigator.of(context).push(
-//            MaterialPageRoute(
-//              builder: (context) {
-//                return SelectBondedDevicePage(checkAvailability: false);
-//              },
-//            ),
-//          );
-          FlutterBluetoothSerial.instance
-              .getBondedDevices()
-              .then((List<BluetoothDevice> bondedDevices)
-          );
-          for (device in bondedDevices){
-            if (device.address.toString() == "00:14:03:05:F2:5A"){
-              final BluetoothDevice selectedDevice = device;
-            }
-            else{
-              final BluetoothDevice selectedDevice = null;
-              print("Unable to find BT")
+        } else {
+          //@TODO, possible to use MAC address for instant connection? How about different ARISE units having different MAC addresses?
+          /*final BluetoothDevice selectedDevice =
+              await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return SelectBondedDevicePage(checkAvailability: false);
+              },
+            ),
+          );*/
+          devices = await FlutterBluetoothSerial.instance
+              .getBondedDevices();
+
+          BluetoothDevice selectedDevice;
+          Iterator i = devices.iterator;
+          while (i.moveNext()){
+            print(i.current.address.toString());
+            if (i.current.address.toString() == "00:14:03:05:F2:5A"){
+              selectedDevice = i.current;
+              print("Found device");
             }
           }
           if (selectedDevice != null) {
@@ -533,5 +554,24 @@ class _BluetoothState extends State<Bluetooth> {
         },
       );
     }
+  }
+  Widget charts (context) {
+    return  RaisedButton(
+      child: const Text('View background collected data'),
+      onPressed: (_collectingTask != null)
+          ? () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return ScopedModel<BackgroundCollectingTask>(
+                model: _collectingTask,
+                child: BackgroundCollectedPage(),
+              );
+            },
+          ),
+        );
+      }
+          : null,
+    );
   }
 }
