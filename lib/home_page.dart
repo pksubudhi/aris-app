@@ -19,6 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+//  final Key keyUIStateBT = PageStorageKey('UIStateBT');
+//  final PageStorageBucket bucket = PageStorageBucket(); //STATE MANAGEMENT
   Choice selectedChoice = choices[0];
   String tapChoice = '';
   Choice selectedAccount = accounts[0];
@@ -174,14 +176,14 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(sizeScale * 30),
                         color: Styles.homeBlue),
                     child: Stack(children: [
-                      alignData(0.03,-0.8,'Left'),
-                      alignData(0.75,-0.8, 'Right'),
-                      alignData(-0.8,0,'Resting'),
-                      alignData(-0.8,0.8,'Active'),
-                      alignDataBold(0.05,0,'28N'),
-                      alignDataBold(0.7,0,'25N'),
-                      alignDataBold(0.05,0.8,'50N'),
-                       alignDataBold(0.7,0.8,'45N'),
+                      alignData(0.03, -0.8, 'Left'),
+                      alignData(0.75, -0.8, 'Right'),
+                      alignData(-0.8, 0, 'Resting'),
+                      alignData(-0.8, 0.8, 'Active'),
+                      alignDataBold(0.05, 0, '28N'),
+                      alignDataBold(0.7, 0, '25N'),
+                      alignDataBold(0.05, 0.8, '50N'),
+                      alignDataBold(0.7, 0.8, '45N'),
                     ]),
                   )),
             ])));
@@ -198,7 +200,8 @@ class _HomePageState extends State<HomePage> {
     double sizeScale = Styles.screenSize(context) / 987;
     return Align(
         alignment: Alignment(x, y),
-        child: Text(text, style: Styles.infoBlackBold, textScaleFactor: sizeScale));
+        child: Text(text,
+            style: Styles.infoBlackBold, textScaleFactor: sizeScale));
   }
 
   Widget balance(BuildContext context) {
@@ -328,6 +331,7 @@ class _HomePageState extends State<HomePage> {
           {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Bluetooth()));
+//                PageStorage (child: Bluetooth(key: keyUIStateBT), bucket: bucket)));
           }
           break;
         default:

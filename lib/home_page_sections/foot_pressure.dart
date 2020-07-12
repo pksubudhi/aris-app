@@ -18,9 +18,13 @@ class _FootPressureState extends State<FootPressure> {
     return Scaffold(
       backgroundColor: Styles.pageBackground,
       appBar: DefaultAppBar(),
-      body: ListTile(
-          title: RaisedButton(
-        child: const Text('View background collected data'),
+      body: Container(
+          child: RaisedButton(
+            color: Colors.pinkAccent,
+            textColor: Colors.white,
+        disabledTextColor: Colors.white,
+        disabledColor: Colors.blueGrey,
+        child: Text('View background collected data'),
         onPressed: (_collectingTask != null)
             ? () {
                 Navigator.of(context).push(
