@@ -3,6 +3,10 @@ import 'package:arisapp/Login_Help/forgot_password.dart';
 import 'package:arisapp/login_page.dart';
 import 'package:flutter/material.dart';
 import 'components/home_app_bar.dart';
+import 'package:provider/provider.dart';
+import 'dart:async';
+import 'package:arisapp/home_appbar_pages/leading/bluetooth/backgroundcollectingtask-providertest.dart';
+
 import 'components/home_bottom_nav_bar.dart';
 import 'styles.dart';
 import 'Home_AppBar_Pages/title/profile.dart';
@@ -31,7 +35,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double size = Styles.screenSize(context) / 987;
     double barWidth = Styles.displayWidth(context) / 414;
-    return new WillPopScope(
+    return Provider(
+      create: (context) => new BackgroundCollectingTask(),
+      child: new WillPopScope(
       // cancels popping functionality on this page (there is no back button)
       onWillPop: () async => false,
       child: new Scaffold(
@@ -129,6 +135,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
+      ),
     );
   }
 
@@ -136,6 +143,7 @@ class _HomePageState extends State<HomePage> {
     double sizeScale = Styles.screenSize(context) / 987;
     double heightScale = Styles.displayHeight(context) / 896;
     double widthScale = Styles.displayWidth(context) / 414;
+
     return GestureDetector(
         onTap: () {
           setState(() {
@@ -432,6 +440,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _navigateToFootPressureDetail(context) {
+
     Navigator.push(
         context,
         MaterialPageRoute(

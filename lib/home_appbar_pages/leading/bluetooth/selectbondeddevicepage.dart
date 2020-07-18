@@ -83,10 +83,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
             Iterator i = devices.iterator;
             while (i.moveNext()) {
               var _device = i.current;
-              if (_device.device == r.device) {
-                _device.availability = _DeviceAvailability.yes;
-                _device.rssi = r.rssi;
-              }
             }
           });
         });

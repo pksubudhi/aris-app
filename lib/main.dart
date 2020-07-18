@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'app.dart';
 import 'package:flutter/services.dart';
+import 'package:arisapp/home_appbar_pages/leading/bluetooth/backgroundcollectingtask-providertest.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
   WidgetsFlutterBinding

@@ -1,11 +1,14 @@
+import 'package:arisapp/home_appbar_pages/leading/bluetooth/backgroundcollectingtask-providertest.dart';
+import 'package:arisapp/home_page_sections/foot_pressure.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:arisapp/components/home_app_bar.dart';
 import '../../../styles.dart';
 import './SelectBondedDevicePage.dart';
-import './BackgroundCollectingTask.dart';
+import './backgroundcollectingtask-providertest.dart';
 import './BackgroundCollectedPage.dart';
 
 //@TODO get rid of useless libraries
@@ -38,6 +41,8 @@ enum _DeviceAvailability {
 
 class _BluetoothState extends State<Bluetooth> {
   List<BluetoothDevice> devices = List<BluetoothDevice>();
+
+
 
   //@ TODO Below code may be useless.
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
@@ -117,6 +122,7 @@ class _BluetoothState extends State<Bluetooth> {
   @override
   Widget build(BuildContext context) {
     double heightScale = Styles.displayHeight(context) / 896;
+
     return Scaffold(
       backgroundColor: Styles.pageBackground,
       appBar: HomeAppBar(title: Text('Bluetooth', style: Styles.title)),
@@ -203,7 +209,7 @@ class _BluetoothState extends State<Bluetooth> {
         sockRTapped = !sockRTapped;
         setState(() {});
       },
-      child: sockRTapped ? charts(context) : noConnection(x, y),
+      child: sockRTapped ? connecting(x, y) : noConnection(x, y),
     );
   }
 
@@ -310,7 +316,7 @@ class _BluetoothState extends State<Bluetooth> {
 
           devices = await FlutterBluetoothSerial.instance.getBondedDevices();
 
-          if ((devices.singleWhere((i) => i.address == "00:14:03:05:F2:5A",
+          if ((devices.singleWhere((i) => i.address == "00:C2:C6:D4:C5:55",
                   orElse: () => null)) !=
               null) {
           } else {
@@ -333,7 +339,7 @@ class _BluetoothState extends State<Bluetooth> {
           Iterator i = devices.iterator;
           while (i.moveNext()) {
             print(i.current.address.toString());
-            if (i.current.address.toString() == "00:14:03:05:F2:5A") {
+            if (i.current.address.toString() == "00:C2:C6:D4:C5:55") {
               selectedDevice = i.current;
               if (selectedDevice.isBonded) {
               } else {
@@ -431,23 +437,13 @@ class _BluetoothState extends State<Bluetooth> {
     }
   }
 
-  Widget charts(context) {
-    return RaisedButton(
-      child: const Text('View background collected data'),
-      onPressed: (_collectingTask != null)
-          ? () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return ScopedModel<BackgroundCollectingTask>(
-                      model: _collectingTask,
-                      child: BackgroundCollectedPage(),
-                    );
-                  },
-                ),
-              );
-            }
-          : null,
+  void charts(context) {
+
+    var model = Provider.of<BackgroundCollectingTask>(context);
+
+    StreamProvider<DataSample>.value(
+      value: model.sampleStream,
     );
+
   }
 }
