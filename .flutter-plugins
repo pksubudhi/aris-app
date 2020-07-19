@@ -1,4 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-flutter_bluetooth_serial=D:\\Documents\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_bluetooth_serial-0.2.2\\
-path_provider=D:\\Documents\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.7\\
-path_provider_macos=D:\\Documents\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+1\\
+flutter_bluetooth_serial=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_bluetooth_serial-0.2.2/
+path_provider=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.7/
+path_provider_linux=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
+path_provider_macos=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+1/
+shared_preferences=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.8/
+shared_preferences_linux=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-0.0.2+1/
+shared_preferences_macos=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-0.0.1+10/
+shared_preferences_web=/Users/NimaFeizi/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+7/

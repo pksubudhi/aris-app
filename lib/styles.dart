@@ -146,7 +146,7 @@ class Styles {
   );
    static final subTitleBlue = TextStyle(
     fontFamily: font,
-    fontSize: _textSizeTitle,
+    fontSize: _textSizeARIS,
     color: homeBlue,
     fontWeight: FontWeight.w700,
   );

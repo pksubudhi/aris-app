@@ -178,12 +178,12 @@ class _BluetoothState extends State<Bluetooth> {
               child: Image.asset('assets/male_cartoon.png',
                   // @TODO in case of a female user, it would change to female cartoon image.
                   fit: BoxFit.contain)),
-          thighR(-0.145, 0.25),
-          shinR(-0.16, 0.6),
-          sockR(-0.14, 0.95),
-          thighL(0.14, 0.25),
-          shinL(0.15, 0.6),
-          sockL(0.14, 0.95),
+          thighR(-0.36, 0.25),
+          shinR(-0.36, 0.6),
+          sockR(-0.36, 0.95),
+          thighL(0.36, 0.25),
+          shinL(0.36, 0.6),
+          sockL(0.36, 0.95),
         ]),
       ),
     );
@@ -210,18 +210,20 @@ class _BluetoothState extends State<Bluetooth> {
         sockRTapped = !sockRTapped;
         setState(() {});
       },
-      child: sockRTapped ? connecting(x, y) : noConnection(x, y),
+      child: sockRTapped ? connected(x, y) : notDiscovered(x, y),
     );
   }
 
   Widget sockL(double x, double y) {
-    return GestureDetector(
+    return connectingLeftAriseMkI(x, y);
+
+     /* GestureDetector(
       onTap: () {
         sockLTapped = !sockLTapped;
         setState(() {});
       },
-      child: sockLTapped ? connectingLeftAriseMkI(x, y) : noConnection(x, y),
-    );
+      child: sockLTapped ? connectedLeftAriseMkI(x, y) : notDiscovered(x, y),
+    );*/
   }
 
   Widget shinR(double x, double y) {
@@ -230,7 +232,7 @@ class _BluetoothState extends State<Bluetooth> {
         shinRTapped = !shinRTapped;
         setState(() {});
       },
-      child: shinRTapped ? connecting(x, y) : noConnection(x, y),
+      child: shinRTapped ? connected(x, y) : notDiscovered(x, y),
     );
   }
 
@@ -240,7 +242,7 @@ class _BluetoothState extends State<Bluetooth> {
         shinLTapped = !shinLTapped;
         setState(() {});
       },
-      child: shinLTapped ? connecting(x, y) : noConnection(x, y),
+      child: shinLTapped ? connected(x, y) : notDiscovered(x, y),
     );
   }
 
@@ -250,7 +252,7 @@ class _BluetoothState extends State<Bluetooth> {
         thighRTapped = !thighRTapped;
         setState(() {});
       },
-      child: thighRTapped ? connecting(x, y) : noConnection(x, y),
+      child: thighRTapped ? connected(x, y) : notDiscovered(x, y),
     );
   }
 
@@ -260,7 +262,7 @@ class _BluetoothState extends State<Bluetooth> {
         thighLTapped = !thighLTapped;
         setState(() {});
       },
-      child: thighLTapped ? connecting(x, y) : noConnection(x, y),
+      child: thighLTapped ? connected(x, y) : notDiscovered(x, y),
     );
   }
 
@@ -270,17 +272,25 @@ class _BluetoothState extends State<Bluetooth> {
 //      connected(x, y);
 //    });
 //  }
-  Widget noConnection(double x, double y) {
+  Widget notDiscovered(double x, double y) {
+    //@TODO this Widget is called only when device is not bonded nor discovered.
     return statusOfConnection(x, y, Icons.check_box_outline_blank, Colors.grey);
   }
 
-  Widget connecting(double x, double y) {
-    return statusOfConnection(x, y, Icons.bluetooth_searching, Styles.arisBlue);
+  Widget isDiscovered (double x, double y) {
+    //@TODO this Widget is called only when device is not bonded but is discovered.
+    //@TODO initiate discovery immediately after entering this Bluetooth page.
+    return statusOfConnection(x, y, Icons.check_box_outline_blank, Styles.arisBlue);
+  }
+
+  Widget notConnected(double x, double y) {
+    //TODO this Widget is called only when device is bonded but not on.
+    return statusOfConnection(x, y, Icons.bluetooth_disabled, Styles.arisBlue);
   }
 
   Widget connected(double x, double y) {
-    //@TODO Implement this for when bluetooth successfully connects
-    return statusOfConnection(x, y, Icons.check, Styles.arisGreen);
+    //TODO this Widget is called only when device is bonded and on.
+    return statusOfConnection(x, y, Icons.bluetooth_connected, Styles.arisGreen);
   }
 
   Widget statusOfConnection(double x, double y, IconData icon, Color color) {
@@ -296,8 +306,10 @@ class _BluetoothState extends State<Bluetooth> {
       // connect state = grey box, disconnect state = green check-mark
       child: ((_collectingTask != null && _collectingTask.inProgress)
           ? connected(x, y)
-          : noConnection(x, y)),
+          : isDiscovered(x, y)),
       onTap: () async {
+        sockLTapped = !sockLTapped;
+        setState(() {});
         // change disconnect functionality to onForcePressEnd
         if (_collectingTask != null && _collectingTask.inProgress) {
           await _collectingTask.cancel();
@@ -305,8 +317,12 @@ class _BluetoothState extends State<Bluetooth> {
 //       Update for `_collectingTask.inProgress`
           });
         } else {
-          connecting(x,y);
+          notConnected(x,y);
           //@TODO, possible to use MAC address for instant connection? How about different ARISE units having different MAC addresses?
+          //@TODO...solution: search for last 4 digits of MAC (same for all ARISE devices), and on discovery pop up a confirm sock ID page
+          //@TODO... with the sock blinking to show which one it's connecting to.
+
+
           /*final BluetoothDevice selectedDevice =
               await Navigator.of(context).push(
             MaterialPageRoute(
@@ -318,7 +334,7 @@ class _BluetoothState extends State<Bluetooth> {
 
           devices = await FlutterBluetoothSerial.instance.getBondedDevices();
 
-          if ((devices.singleWhere((i) => i.address == "00:C2:C6:D4:C5:55",
+          if ((devices.singleWhere((i) => i.address == "00:14:03:05:F2:5A",
                   orElse: () => null)) !=
               null) {
           } else {
@@ -341,7 +357,7 @@ class _BluetoothState extends State<Bluetooth> {
           Iterator i = devices.iterator;
           while (i.moveNext()) {
             print(i.current.address.toString());
-            if (i.current.address.toString() == "00:C2:C6:D4:C5:55") {
+            if (i.current.address.toString() == "00:14:03:05:F2:5A") {
               selectedDevice = i.current;
               if (selectedDevice.isBonded) {
               } else {
