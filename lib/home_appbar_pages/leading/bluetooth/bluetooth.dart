@@ -8,7 +8,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:arisapp/components/home_app_bar.dart';
 import '../../../styles.dart';
 import './SelectBondedDevicePage.dart';
-import './backgroundcollectingtask-providertest.dart';
 import './BackgroundCollectedPage.dart';
 
 //@TODO get rid of useless libraries
@@ -122,6 +121,8 @@ class _BluetoothState extends State<Bluetooth> {
   @override
   Widget build(BuildContext context) {
     double heightScale = Styles.displayHeight(context) / 896;
+
+    _collectingTask = Provider.of<BackgroundCollectingTask>(context);
 
     return Scaffold(
       backgroundColor: Styles.pageBackground,
@@ -304,6 +305,7 @@ class _BluetoothState extends State<Bluetooth> {
 //       Update for `_collectingTask.inProgress`
           });
         } else {
+          connecting(x,y);
           //@TODO, possible to use MAC address for instant connection? How about different ARISE units having different MAC addresses?
           /*final BluetoothDevice selectedDevice =
               await Navigator.of(context).push(
@@ -351,6 +353,7 @@ class _BluetoothState extends State<Bluetooth> {
           }
           if (selectedDevice != null) {
             await _startBackgroundTask(context, selectedDevice);
+            connected(x,y);
             setState(() {
 // Update for `_collectingTask.inProgress`
             });
@@ -411,10 +414,10 @@ class _BluetoothState extends State<Bluetooth> {
     BluetoothDevice server,
   ) async {
     try {
-      _collectingTask = await BackgroundCollectingTask.connect(server);
+      await _collectingTask.connect(server);
       await _collectingTask.start();
     } catch (ex) {
-      if (_collectingTask != null) {
+      if (_collectingTask != null && _collectingTask.inProgress) {
         _collectingTask.cancel();
       }
       showDialog(
@@ -439,11 +442,6 @@ class _BluetoothState extends State<Bluetooth> {
 
   void charts(context) {
 
-    var model = Provider.of<BackgroundCollectingTask>(context);
-
-    StreamProvider<DataSample>.value(
-      value: model.sampleStream,
-    );
 
   }
 }

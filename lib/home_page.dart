@@ -31,19 +31,21 @@ class _HomePageState extends State<HomePage> {
   String tapAccount = ''; // top nav bar
   int _currentIndex = 2; // bottom nav bar
 
+
   @override
   Widget build(BuildContext context) {
     double size = Styles.screenSize(context) / 987;
     double barWidth = Styles.displayWidth(context) / 414;
-    return Provider(
-      create: (context) => new BackgroundCollectingTask(),
-      child: new WillPopScope(
+
+    return new WillPopScope(
       // cancels popping functionality on this page (there is no back button)
-      onWillPop: () async => false,
-      child: new Scaffold(
-        backgroundColor: Styles.pageBackground,
-        appBar: HomeAppBar(
-          title: GestureDetector(
+        onWillPop: () async => false,
+        child: new Scaffold(
+
+          backgroundColor: Styles.pageBackground,
+
+          appBar: HomeAppBar(
+            title: GestureDetector(
               onTap: () {
                 setState(() {
                   _navigateToProfile(context);
@@ -135,8 +137,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      ),
-    );
+      );
   }
 
   Widget footPressure(BuildContext context) {
@@ -337,8 +338,10 @@ class _HomePageState extends State<HomePage> {
           break;
         case "ARISE Connect":
           {
+
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Bluetooth()));
+                context, MaterialPageRoute(
+                builder: (context) => Bluetooth()));
 //                PageStorage (child: Bluetooth(key: keyUIStateBT), bucket: bucket)));
           }
           break;

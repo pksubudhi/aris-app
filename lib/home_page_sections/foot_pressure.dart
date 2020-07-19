@@ -36,8 +36,7 @@ class _FootPressureState extends State<FootPressure> {
                           children: <Widget>[
                             Text(
                               'Listening a value :' + Provider
-                                  .of<DataSample>(context)
-                                  .temperature1
+                                  .of<DataSample>(context).temperature1
                                   .toString(),
                               style: TextStyle(
                                   color:Colors.white
@@ -45,8 +44,7 @@ class _FootPressureState extends State<FootPressure> {
                             ),
                             Text(
                               'Listening a value :' + Provider
-                                  .of<DataSample>(context)
-                                  .temperature2
+                                  .of<DataSample>(context).temperature2
                                   .toString(),
                               style: TextStyle(
                                   color:Colors.white
@@ -54,8 +52,7 @@ class _FootPressureState extends State<FootPressure> {
                             ),
                             Text(
                               'Listening a value :' + Provider
-                                  .of<DataSample>(context)
-                                  .temperature2
+                                  .of<DataSample>(context).temperature3
                                   .toString(),
                               style: TextStyle(
                                   color:Colors.white

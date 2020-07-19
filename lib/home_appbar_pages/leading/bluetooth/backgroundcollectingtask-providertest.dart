@@ -31,26 +31,35 @@ class DataSample {
 class BackgroundCollectingTask {
 
   BluetoothConnection _connection;
-  List<int> _buffer = List<int>();
+  List<int> _buffer;
   DataSample _sample;
 
-  StreamController<DataSample> _sampleController = StreamController();
+  StreamController<DataSample> _sampleController;
   Stream<DataSample> get sampleStream => _sampleController.stream;
 
   // @TODO , Such sample collection in real code should be delegated
   // (via `Stream<DataSample>` preferably) and then saved for later
   // displaying on chart (or even stright prepare for displaying).
   // @TODO ? should be shrinked at some point, endless colleting data would cause memory shortage.
-  List<String> dataList = List<String>();
+  List<String> dataList;
   var lineEndIndex;
   var lineStartIndex;
 
   bool inProgress;
 
-  BackgroundCollectingTask();
+  BackgroundCollectingTask(){
+    inProgress = false;
+    _sampleController = StreamController();
+    _buffer = List<int>();
+    _connection = null;
+    dataList = List<String>();
+    lineEndIndex = null;
+    lineStartIndex = null;
+  }
 
-  BackgroundCollectingTask._fromConnection(this._connection) {
+  _fromConnection() {
     _connection.input.listen((data) {
+      inProgress = true;
       _buffer+=data;
       lineStartIndex = _buffer.lastIndexWhere((i) => (i>57 || i==0));
       if (lineStartIndex == -1){
@@ -94,11 +103,11 @@ class BackgroundCollectingTask {
     print("updated sample");
   }
 
-  static Future<BackgroundCollectingTask> connect(
+   Future<BackgroundCollectingTask> connect(
       BluetoothDevice server) async {
-    final BluetoothConnection connection =
+    _connection =
     await BluetoothConnection.toAddress(server.address);
-    return BackgroundCollectingTask._fromConnection(connection);
+    return _fromConnection();
   }
 
   void dispose() {
@@ -108,7 +117,6 @@ class BackgroundCollectingTask {
 
   Future<void> start() async {
     inProgress = true;
-    _buffer.clear();
   }
 
   Future<void> cancel() async {
