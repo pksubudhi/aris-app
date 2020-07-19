@@ -14,6 +14,7 @@ import 'home_page_sections/foot_pressure.dart';
 import 'home_page_sections/activity.dart';
 import 'home_page_sections/balance.dart';
 import 'sync_page/sync.dart';
+import 'profile_page/add_profile.dart';
 import 'home_appbar_pages/leading/bluetooth/bluetooth.dart';
 import 'injury_page/live_alert.dart';
 
@@ -31,7 +32,6 @@ class _HomePageState extends State<HomePage> {
   String tapAccount = ''; // top nav bar
   int _currentIndex = 2; // bottom nav bar
 
-
   @override
   Widget build(BuildContext context) {
     double size = Styles.screenSize(context) / 987;
@@ -39,13 +39,11 @@ class _HomePageState extends State<HomePage> {
 
     return new WillPopScope(
       // cancels popping functionality on this page (there is no back button)
-        onWillPop: () async => false,
-        child: new Scaffold(
-
-          backgroundColor: Styles.pageBackground,
-
-          appBar: HomeAppBar(
-            title: GestureDetector(
+      onWillPop: () async => false,
+      child: new Scaffold(
+        backgroundColor: Styles.pageBackground,
+        appBar: HomeAppBar(
+          title: GestureDetector(
               onTap: () {
                 setState(() {
                   _navigateToProfile(context);
@@ -137,7 +135,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      );
+    );
   }
 
   Widget footPressure(BuildContext context) {
@@ -338,10 +336,8 @@ class _HomePageState extends State<HomePage> {
           break;
         case "ARISE Connect":
           {
-
             Navigator.push(
-                context, MaterialPageRoute(
-                builder: (context) => Bluetooth()));
+                context, MaterialPageRoute(builder: (context) => Bluetooth()));
 //                PageStorage (child: Bluetooth(key: keyUIStateBT), bucket: bucket)));
           }
           break;
@@ -381,8 +377,8 @@ class _HomePageState extends State<HomePage> {
           break;
         case "Add Profile":
           {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PasswordHelp()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AddProfile()));
           }
           break;
         default:
@@ -443,7 +439,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   _navigateToFootPressureDetail(context) {
-
     Navigator.push(
         context,
         MaterialPageRoute(
