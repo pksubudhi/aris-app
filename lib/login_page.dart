@@ -218,26 +218,14 @@ class _LoginPageState extends State<LoginPage> {
 
   void _navigateToHomePage(context) {
     // "Context" means the widget is NOT the primary branch, but also not a leaf.
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
+
   }
 
   void _navigateToPasswordHelp(context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PasswordHelp(),
-        ));
+
   }
 
   void _navigateToCreateAccount(context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CreateAccount(),
-        ));
+
   }
 }

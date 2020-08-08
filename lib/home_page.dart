@@ -17,6 +17,7 @@ import 'sync_page/sync.dart';
 import 'profile_page/add_profile.dart';
 import 'home_appbar_pages/leading/bluetooth/bluetooth.dart';
 import 'injury_page/live_alert.dart';
+import 'threshold_page/threshold.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -313,7 +314,7 @@ class _HomePageState extends State<HomePage> {
     // top nav bar
     setState(() {
       selectedChoice = choice;
-      print(choice.title);
+      print("You selected menu item: "+choice.title);
       tapChoice = choice.title;
       switch (tapChoice) {
         case "Log out":
@@ -413,7 +414,7 @@ class _HomePageState extends State<HomePage> {
       case 3:
         {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
+              context, MaterialPageRoute(builder: (context) => ThresholdPage()));
         }
         break;
       case 4:

@@ -281,7 +281,7 @@ class _LiveAlertState extends State<LiveAlert> {
           TableCell(
             child: Center(
                 child: Text(
-              'Critcal',
+              '',
               style: Styles.riskCritical,
               textScaleFactor: sizeScale,
             )), //
@@ -358,19 +358,7 @@ class _LiveAlertState extends State<LiveAlert> {
         TableRow(children: [
           TableCell(
               child: Center(
-                  child: Text(
-            '---------',
-            style: Styles.playerNames,
-            textScaleFactor: sizeScale,
-          ))),
-          TableCell(
-            child: Center(
-                child: Text(
-              '---------',
-              style: Styles.playerNames,
-              textScaleFactor: sizeScale,
-            )), //
-          ),
+           )),
         ]),
         TableRow(children: [
           TableCell(
