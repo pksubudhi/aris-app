@@ -98,18 +98,35 @@ class _ThresholdState extends State<ThresholdPage> {
                 // specified, the default creates local date time.
                 dateTimeFactory: const charts.LocalDateTimeFactory(),
                 primaryMeasureAxis: new charts.NumericAxisSpec(
+                  renderSpec: new charts.SmallTickRendererSpec(
+                    labelStyle: new charts.TextStyleSpec(
+                        color: charts.MaterialPalette.white
+                    ),
+                    // Tick and Label styling here.
+                  )
+                ),
+                domainAxis: new charts.DateTimeAxisSpec(
                     renderSpec: new charts.SmallTickRendererSpec(
-                      // Tick and Label styling here.
+                      labelStyle: new charts.TextStyleSpec(
+                          color: charts.MaterialPalette.white
+                      ),
                     )
                 ),
                 behaviors: [
                   new charts.ChartTitle('Temperature (F)',
                       behaviorPosition: charts.BehaviorPosition.start,
                       titleOutsideJustification:
-                      charts.OutsideJustification.middleDrawArea),
+                      charts.OutsideJustification.middleDrawArea,
+                      titleStyleSpec: new charts.TextStyleSpec(
+                            color: charts.MaterialPalette.white
+                      )
+                  ),
                   new charts.SeriesLegend(
                     desiredMaxRows:3,
                     desiredMaxColumns: 3,
+                      entryTextStyle: new charts.TextStyleSpec(
+                          color: charts.MaterialPalette.white
+                      )
                   ),
                 ],
               ),
