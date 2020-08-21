@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../styles.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:provider/provider.dart';
+import 'package:arisapp/home_appbar_pages/leading/bluetooth/backgroundcollectingtask-providertest.dart';
+
 
 
 class ThresholdPage extends StatefulWidget {
   @override
-  createState() => _ThresholdState(_createSampleData());
+  createState() => _ThresholdState();
 }
 
 
@@ -16,24 +19,129 @@ class _ThresholdState extends State<ThresholdPage> {
   int _currentIndex = 3; // bottom nav bar
 
   double screen;
-  final List<charts.Series> seriesList;
-  final bool animate;
-
-  _ThresholdState(this.seriesList, {this.animate});
-
-  /// Creates a [TimeSeriesChart] with sample data and no transition.
-  factory _ThresholdState.withSampleData() {
-    return new _ThresholdState(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: true,
-    );
-  }
-
-
+  List<charts.Series<TimeSeriesTemperature, DateTime>> seriesList;
+  bool animate = true;
 
   @override
   Widget build(BuildContext context) {
+    List<TimeSeriesTemperature> threshold = List();
+    List<TimeSeriesTemperature> sensorA = List();
+    List<TimeSeriesTemperature> sensorB = List();
+    List<TimeSeriesTemperature> sensorC = List();
+    List<TimeSeriesTemperature> sensorD = List();
+    List<TimeSeriesTemperature> sensorE = List();
+    List<TimeSeriesTemperature> sensorF = List();
+    List<TimeSeriesTemperature> sensorG = List();
+
+    threshold.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,160));
+
+    sensorA.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature1));
+
+    sensorB.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature2));
+
+    sensorC.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature3));
+
+    sensorD.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature4));
+
+    sensorE.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature5));
+
+    sensorF.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature6));
+
+    sensorG.add(new TimeSeriesTemperature(Provider
+        .of<DataSample>(context).timestamp,Provider
+        .of<DataSample>(context).temperature7));
+
+    /// Create one series with sample hard coded data.
+    seriesList = [
+/*new charts.Series<TimeSeriesSales, DateTime>(
+id: 'Desktop',
+colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+domainFn: (TimeSeriesSales sales, _) => sales.time,
+measureFn: (TimeSeriesSales sales, _) => sales.sales,
+data: desktopSalesData,
+),*/
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'Threshold',
+        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: threshold,
+        displayName: "Threshold",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorA',
+        colorFn: (_, __) => charts.MaterialPalette.yellow.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorA,
+        displayName: "SensorA",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorB',
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorB,
+        displayName: "sensorB",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorC',
+        colorFn: (_, __) => charts.MaterialPalette.indigo.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorC,
+        displayName: "sensorC",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorD',
+        colorFn: (_, __) => charts.MaterialPalette.lime.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorD,
+        displayName: "sensorD",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorE',
+        colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorE,
+        displayName: "sensorE",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorF',
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorF,
+        displayName: "sensorF",
+      ),
+      new charts.Series<TimeSeriesTemperature, DateTime>(
+        id: 'sensorG',
+        colorFn: (_, __) => charts.MaterialPalette.purple.shadeDefault,
+        domainFn: (TimeSeriesTemperature sales, _) => sales.time,
+        measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
+        data: sensorG,
+        displayName: "sensorG",
+      ),
+// Configure our custom point renderer for this series.
+/*..setAttribute(charts.rendererIdKey, 'customPoint'),*/
+    ];
+
+
     screen = Styles.screenSize(context);
     return Scaffold(
         backgroundColor: Styles.pageBackground,
@@ -142,158 +250,7 @@ class _ThresholdState extends State<ThresholdPage> {
 
 }
 
-/// Create one series with sample hard coded data.
-List<charts.Series<TimeSeriesTemperature, DateTime>> _createSampleData() {
 
-
-final threshold = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 160),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 160),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 160),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 160),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 160),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 160),
-];
-
-final sensorA = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 123),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 118),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 115),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 125),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 120),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 117),
-  ];
-
-final sensorB = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 110),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 115),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 112),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 117),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 118),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 111),
-];
-
-final sensorC = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 120),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 125),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 126),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 130),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 132),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 123),
-];
-
-final sensorD = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 130),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 132),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 138),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 139),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 135),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 127),
-];
-
-final sensorE = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 143),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 144),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 148),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 150),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 148),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 139),
-];
-
-final sensorF = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 160),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 150),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 165),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 170),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 140),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 135),
-];
-
-final sensorG = [
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 6), 127),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 7), 120),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 8), 117),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 9), 149),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 10), 130),
-  new TimeSeriesTemperature(new DateTime(0, 0, 0, 11), 115),
-];
-
-return [
-/*new charts.Series<TimeSeriesSales, DateTime>(
-id: 'Desktop',
-colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-domainFn: (TimeSeriesSales sales, _) => sales.time,
-measureFn: (TimeSeriesSales sales, _) => sales.sales,
-data: desktopSalesData,
-),*/
-new charts.Series<TimeSeriesTemperature, DateTime>(
-  id: 'Threshold',
-  colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-  domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-  measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-  data: threshold,
-  displayName: "Threshold",
-),
-new charts.Series<TimeSeriesTemperature, DateTime>(
-  id: 'sensorA',
-  colorFn: (_, __) => charts.MaterialPalette.yellow.shadeDefault,
-  domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-  measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-  data: sensorA,
-  displayName: "SensorA",
-),
-  new charts.Series<TimeSeriesTemperature, DateTime>(
-    id: 'sensorB',
-    colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-    domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-    measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-    data: sensorB,
-    displayName: "sensorB",
-  ),
-  new charts.Series<TimeSeriesTemperature, DateTime>(
-    id: 'sensorC',
-    colorFn: (_, __) => charts.MaterialPalette.indigo.shadeDefault,
-    domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-    measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-    data: sensorC,
-    displayName: "sensorC",
-  ),
-  new charts.Series<TimeSeriesTemperature, DateTime>(
-    id: 'sensorD',
-    colorFn: (_, __) => charts.MaterialPalette.lime.shadeDefault,
-    domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-    measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-    data: sensorD,
-    displayName: "sensorD",
-  ),
-  new charts.Series<TimeSeriesTemperature, DateTime>(
-    id: 'sensorE',
-    colorFn: (_, __) => charts.MaterialPalette.teal.shadeDefault,
-    domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-    measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-    data: sensorE,
-    displayName: "sensorE",
-  ),
-  new charts.Series<TimeSeriesTemperature, DateTime>(
-    id: 'sensorF',
-    colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-    domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-    measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-    data: sensorF,
-    displayName: "sensorF",
-  ),
-  new charts.Series<TimeSeriesTemperature, DateTime>(
-    id: 'sensorG',
-    colorFn: (_, __) => charts.MaterialPalette.purple.shadeDefault,
-    domainFn: (TimeSeriesTemperature sales, _) => sales.time,
-    measureFn: (TimeSeriesTemperature sales, _) => sales.sales,
-    data: sensorG,
-    displayName: "sensorG",
-  ),
-// Configure our custom point renderer for this series.
-/*..setAttribute(charts.rendererIdKey, 'customPoint'),*/
-];
-}
 
 /// Create one series with sample hard coded data.
 List<charts.Series<HeatLocation, double>> _createSampleData2() {
@@ -338,7 +295,7 @@ List<charts.Series<HeatLocation, double>> _createSampleData2() {
       measureFn: (HeatLocation heatPoint, _) => heatPoint.y,
       // Providing a radius function is optional.
       radiusPxFn: (HeatLocation heatPoint, _) => heatPoint.radius,
-      colorFn: (_, __) => charts.MaterialPalette.skin,
+      colorFn: (_, __) => charts.MaterialPalette.pink.shadeDefault,
       data: sensorCandDright,
     ),
     new charts.Series<HeatLocation, double>(
@@ -347,7 +304,7 @@ List<charts.Series<HeatLocation, double>> _createSampleData2() {
       measureFn: (HeatLocation heatPoint, _) => heatPoint.y,
       // Providing a radius function is optional.
       radiusPxFn: (HeatLocation heatPoint, _) => heatPoint.radius,
-      colorFn: (_, __) => charts.MaterialPalette.skin,
+      colorFn: (_, __) => charts.MaterialPalette.pink.shadeDefault,
       data: sensorAandBright,
     ),
     new charts.Series<HeatLocation, double>(
@@ -356,7 +313,7 @@ List<charts.Series<HeatLocation, double>> _createSampleData2() {
       measureFn: (HeatLocation heatPoint, _) => heatPoint.y,
       // Providing a radius function is optional.
       radiusPxFn: (HeatLocation heatPoint, _) => heatPoint.radius,
-      colorFn: (_, __) => charts.MaterialPalette.skin,
+      colorFn: (_, __) => charts.MaterialPalette.pink.shadeDefault,
       data: sensorAandBleft,
     ),
     new charts.Series<HeatLocation, double>(
@@ -392,7 +349,7 @@ List<charts.Series<HeatLocation, double>> _createSampleData2() {
       measureFn: (HeatLocation heatPoint, _) => heatPoint.y,
       // Providing a radius function is optional.
       radiusPxFn: (HeatLocation heatPoint, _) => heatPoint.radius,
-      colorFn: (_, __) => charts.MaterialPalette.lightCoral,
+      colorFn: (_, __) => charts.MaterialPalette.cyan.shadeDefault,
       data: sensorGandFright,
     ),
     new charts.Series<HeatLocation, double>(
@@ -401,7 +358,7 @@ List<charts.Series<HeatLocation, double>> _createSampleData2() {
       measureFn: (HeatLocation heatPoint, _) => heatPoint.y,
       // Providing a radius function is optional.
       radiusPxFn: (HeatLocation heatPoint, _) => heatPoint.radius,
-      colorFn: (_, __) => charts.MaterialPalette.lightCoral,
+      colorFn: (_, __) => charts.MaterialPalette.cyan.shadeDefault,
       data: sensorGandFleft,
     ),
   ];
@@ -410,7 +367,7 @@ List<charts.Series<HeatLocation, double>> _createSampleData2() {
 /// Sample time series data type.
 class TimeSeriesTemperature {
   final DateTime time;
-  final int sales;
+  final double sales;
 
   TimeSeriesTemperature(this.time, this.sales);
 }
