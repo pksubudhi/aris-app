@@ -1,6 +1,7 @@
 import 'package:arisapp/components/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../styles.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:provider/provider.dart';
@@ -33,35 +34,47 @@ class _ThresholdState extends State<ThresholdPage> {
     List<TimeSeriesTemperature> sensorF = List();
     List<TimeSeriesTemperature> sensorG = List();
 
-    threshold.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,160));
+    threshold.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),160));
 
-    sensorA.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    print(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond));
+
+    sensorA.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature1));
 
-    sensorB.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    sensorB.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature2));
 
-    sensorC.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    sensorC.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature3));
 
-    sensorD.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    sensorD.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature4));
 
-    sensorE.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    sensorE.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature5));
 
-    sensorF.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    sensorF.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature6));
 
-    sensorG.add(new TimeSeriesTemperature(Provider
-        .of<DataSample>(context).timestamp,Provider
+    sensorG.add(new TimeSeriesTemperature(new DateTime(0, 0, 0,Provider
+        .of<DataSample>(context).timestamp.second, Provider
+        .of<DataSample>(context).timestamp.millisecond),Provider
         .of<DataSample>(context).temperature7));
 
     /// Create one series with sample hard coded data.
