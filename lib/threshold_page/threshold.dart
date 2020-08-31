@@ -137,15 +137,21 @@ class ThresholdPage extends StatelessWidget {
   /// Create one series with sample hard coded data.
   List<charts.Series<TimeSeriesTemperature, DateTime>> _createSampleData(
       BuildContext context) {
-    threshold.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    threshold.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
         .of<DataSample>(context)
         .timestamp
-        .millisecond), 160));
+        .millisecond), 500));
 
-    print(new DateTime(0, 0, 0, Provider
+    print(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -153,7 +159,10 @@ class ThresholdPage extends StatelessWidget {
         .timestamp
         .millisecond));
 
-    sensorA.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorA.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -163,7 +172,10 @@ class ThresholdPage extends StatelessWidget {
         .of<DataSample>(context)
         .temperature1));
 
-    sensorB.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorB.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -173,7 +185,10 @@ class ThresholdPage extends StatelessWidget {
         .of<DataSample>(context)
         .temperature2));
 
-    sensorC.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorC.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -183,7 +198,10 @@ class ThresholdPage extends StatelessWidget {
         .of<DataSample>(context)
         .temperature3));
 
-    sensorD.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorD.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -193,7 +211,10 @@ class ThresholdPage extends StatelessWidget {
         .of<DataSample>(context)
         .temperature4));
 
-    sensorE.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorE.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -203,7 +224,10 @@ class ThresholdPage extends StatelessWidget {
         .of<DataSample>(context)
         .temperature5));
 
-    sensorF.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorF.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
@@ -213,7 +237,10 @@ class ThresholdPage extends StatelessWidget {
         .of<DataSample>(context)
         .temperature6));
 
-    sensorG.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, Provider
+    sensorG.add(new TimeSeriesTemperature(new DateTime(0, 0, 0, 0, Provider
+        .of<DataSample>(context)
+        .timestamp
+        .minute, Provider
         .of<DataSample>(context)
         .timestamp
         .second, Provider
