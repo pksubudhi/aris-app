@@ -334,7 +334,7 @@ class _BluetoothState extends State<Bluetooth> {
 
           devices = await FlutterBluetoothSerial.instance.getBondedDevices();
 
-          if ((devices.singleWhere((i) => i.address == "00:C2:C6:D4:C5:55",
+          if ((devices.singleWhere((i) => i.address == "00:14:03:05:F2:5A", //@TODO For Gordon: 00:C2:C6:D4:C5:55, For ARISE: 00:14:03:05:F2:5A
                   orElse: () => null)) !=
               null) {
           } else {
@@ -357,7 +357,7 @@ class _BluetoothState extends State<Bluetooth> {
           Iterator i = devices.iterator;
           while (i.moveNext()) {
             print(i.current.address.toString());
-            if (i.current.address.toString() == "00:C2:C6:D4:C5:55") {
+            if (i.current.address.toString() == "00:14:03:05:F2:5A") { //@TODO For Gordon: 00:C2:C6:D4:C5:55, For ARISE: 00:14:03:05:F2:5A
               selectedDevice = i.current;
               if (selectedDevice.isBonded) {
               } else {

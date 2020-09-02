@@ -16,17 +16,18 @@ class _FootPressureState extends State<FootPressure> {
 
   @override
   Widget build(BuildContext context) {
-
+    double heightScale = Styles.displayHeight(context) / 896;
     return Scaffold(
       backgroundColor: Styles.pageBackground,
       appBar: DefaultAppBar(),
       body: Container(
+        alignment: Alignment.center,
           child: RaisedButton(
-            color: Colors.pinkAccent,
+            color: Styles.arisBlue,
             textColor: Colors.white,
             disabledTextColor: Colors.white,
             disabledColor: Colors.blueGrey,
-            child: Text('View background collected data'),
+            child: Text('Click to view incoming data', textAlign: TextAlign.center),
             onPressed:
             () {
                 Navigator.of(context).push(
@@ -35,28 +36,61 @@ class _FootPressureState extends State<FootPressure> {
                       return Column(
                           children: <Widget>[
                             Text(
-                              'Listening a value :' + Provider
+                              'Sensor A:' + Provider
                                   .of<DataSample>(context).temperature1
                                   .toString(),
-                              style: TextStyle(
-                                  color:Colors.white
-                              ),
+                              style:  Styles.infoWhite,
+                            ),
+                            Container(
+                              height: heightScale * 3,
+                              color: Styles.arisBlue,
                             ),
                             Text(
-                              'Listening a value :' + Provider
+                              'Sensor B:' + Provider
                                   .of<DataSample>(context).temperature2
                                   .toString(),
-                              style: TextStyle(
-                                  color:Colors.white
-                              ),
+                              style:  Styles.infoWhite,
+                            ),
+                            Container(
+                              height: heightScale * 3,
+                              color: Styles.arisBlue,
                             ),
                             Text(
-                              'Listening a value :' + Provider
+                              'Sensor C:' + Provider
                                   .of<DataSample>(context).temperature3
                                   .toString(),
-                              style: TextStyle(
-                                  color:Colors.white
-                              ),
+                              style:
+                                Styles.infoWhite,
+                            ),
+                            Container(
+                              height: heightScale * 3,
+                              color: Styles.arisBlue,
+                            ),
+                            Text(
+                              'Sensor D:' + Provider
+                                  .of<DataSample>(context).temperature4
+                                  .toString(),
+                              style:  Styles.infoWhite,
+                            ),
+                            Container(
+                              height: heightScale * 3,
+                              color: Styles.arisBlue,
+                            ),
+                            Text(
+                              'Sensor E:' + Provider
+                                  .of<DataSample>(context).temperature5
+                                  .toString(),
+                              style:  Styles.infoWhite,
+                            ),
+                            Container(
+                              height: heightScale * 3,
+                              color: Styles.arisBlue,
+                            ),
+                            Text(
+                              'Sensor F:' + Provider
+                                  .of<DataSample>(context).temperature6
+                                  .toString(),
+                              style:  Styles.infoWhite,
                             ),
                           ]
                       );

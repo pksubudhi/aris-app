@@ -6,7 +6,7 @@ import 'components/home_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:arisapp/home_appbar_pages/leading/bluetooth/backgroundcollectingtask-providertest.dart';
-
+import 'package:arisapp/Recovery_page/recovery_page.dart';
 import 'components/home_bottom_nav_bar.dart';
 import 'styles.dart';
 import 'Home_AppBar_Pages/title/profile.dart';
@@ -420,7 +420,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PasswordHelp()));
+              context, MaterialPageRoute(builder: (context) => RecoveryPage()));
         }
         break;
       default:
