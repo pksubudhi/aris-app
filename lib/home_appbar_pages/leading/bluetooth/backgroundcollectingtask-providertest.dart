@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
+// fields for getting temperature detail from 6 sensors
 class DataSample {
   double temperature1;
   double temperature2;
@@ -30,7 +31,7 @@ class DataSample {
 
 class BackgroundCollectingTask {
 
-  BluetoothConnection _connection;
+  BluetoothConnection _connection; //class is from flutter_bluetooth_serial.dart
   List<int> _buffer;
   DataSample _sample;
 
